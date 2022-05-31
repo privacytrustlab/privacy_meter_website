@@ -5,14 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Privacy meter</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.0.2/tailwind.min.css">
-
 </head>
 <body>
 
-<!-- Section 1 -->
+<!-- Section 1: header -->
 <section class="relative w-full px-8 text-gray-700 bg-white body-font">
     <div class="container flex flex-col flex-wrap items-center justify-between py-5 mx-auto md:flex-row max-w-7xl">
-        <a href="#_" class="relative z-10 flex items-center w-auto text-2xl font-extrabold leading-none text-black select-none">tails.</a>
+
+        <img src="images/logo.png" alt="privacy_meter logo" style="height: 50px; width: auto">
 
         <nav class="top-0 left-0 z-0 flex items-center justify-center w-full h-full py-5 -ml-0 space-x-5 text-base md:-ml-5 md:py-0 md:absolute">
             <a href="#_" class="relative font-medium leading-6 text-gray-600 transition duration-150 ease-out hover:text-gray-900" x-data="{ hover: false }" @mouseenter="hover = true" @mouseleave="hover = false">
@@ -44,54 +44,67 @@
     </div>
 </section>
 
-<!-- Section 2 -->
+<!-- Section 2: heros -->
 <section class="px-2 py-32 bg-white md:px-0">
-  <div class="container items-center max-w-6xl px-8 mx-auto xl:px-5">
-    <div class="flex flex-wrap items-center sm:-mx-3">
-      <div class="w-full md:w-1/2 md:px-3">
-        <div class="w-full pb-6 space-y-6 sm:max-w-md lg:max-w-lg md:space-y-4 lg:space-y-8 xl:space-y-9 sm:pr-5 lg:pr-0 md:pb-0">
-          <h1 class="text-4xl font-extrabold tracking-tight text-gray-900 sm:text-5xl md:text-4xl lg:text-5xl xl:text-6xl">
-            <span class="block xl:inline">A</span>
-            <span class="block text-indigo-600 xl:inline">privacy auditing</span>
-            <span class="block xl:inline">tool for all!</span>
-          </h1>
-          <p class="mx-auto text-base text-gray-500 sm:max-w-md lg:text-xl md:max-w-3xl">It's never been easier to audit the privacy of an algorithm, by using built-in features or by plugging-in your own custom metric.</p>
-          <div class="relative flex flex-col sm:flex-row sm:space-x-4">
-            <a href="https://pypi.org/project/privacy-meter/" class="flex items-center w-full px-6 py-3 mb-3 text-lg text-white bg-indigo-600 rounded-md sm:mb-0 hover:bg-indigo-700 sm:w-auto">
-              Get it
-              <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 ml-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
-            </a>
-            <a href="https://github.com/privacytrustlab/ml_privacy_meter" class="flex items-center px-6 py-3 text-gray-500 bg-gray-100 rounded-md hover:bg-gray-200 hover:text-gray-600">
-              Contribute
-            </a>
-            <a href="#_" class="flex items-center px-6 py-3 text-gray-500 bg-gray-100 rounded-md hover:bg-gray-200 hover:text-gray-600">
-              Documentation
-            </a>
-          </div>
+    <div class="container items-center max-w-6xl px-8 mx-auto xl:px-5">
+        <div class="flex flex-wrap items-center sm:-mx-3">
+            <div class="w-full md:w-1/2 md:px-3">
+                <div class="w-full pb-6 space-y-6 sm:max-w-md lg:max-w-lg md:space-y-4 lg:space-y-8 xl:space-y-9 sm:pr-5 lg:pr-0 md:pb-0">
+                    <h1 class="text-4xl font-extrabold tracking-tight text-gray-900 sm:text-5xl md:text-4xl lg:text-5xl xl:text-6xl">
+                        <span class="block xl:inline">A</span>
+                        <span class="block text-indigo-600 xl:inline">privacy auditing</span>
+                        <span class="block xl:inline">library for all!</span>
+                    </h1>
+                    <p class="mx-auto text-base text-gray-500 sm:max-w-md lg:text-xl md:max-w-3xl">It's never been easier to audit the privacy of an algorithm, by using built-in features or by plugging-in your own custom metric.</p>
+                    <div class="relative flex flex-col sm:flex-row sm:space-x-4">
+                        <a href="https://pypi.org/project/privacy-meter/" class="flex items-center w-full px-6 py-3 mb-3 text-lg text-white bg-indigo-600 rounded-md sm:mb-0 hover:bg-indigo-700 sm:w-auto">
+                            Get it
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 ml-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                        </a>
+                        <a href="https://github.com/privacytrustlab/ml_privacy_meter" class="flex items-center px-6 py-3 text-gray-500 bg-gray-100 rounded-md hover:bg-gray-200 hover:text-gray-600">
+                            Contribute
+                        </a>
+                        <a href="docs/index.html" class="flex items-center px-6 py-3 text-gray-500 bg-gray-100 rounded-md hover:bg-gray-200 hover:text-gray-600">
+                            Documentation
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="w-full md:w-1/2">
+                <div class="w-full h-auto overflow-hidden rounded-md shadow-xl sm:rounded-xl">
+                    <img src="images/main_img.png">
+                </div>
+            </div>
         </div>
-      </div>
-      <div class="w-full md:w-1/2">
-        <div class="w-full h-auto overflow-hidden rounded-md shadow-xl sm:rounded-xl">
-            <img src="images/main_img.png">
-          </div>
-      </div>
     </div>
-  </div>
 </section>
 
-<!-- Section 3 -->
+<!-- Section 2 bis: description -->
+<section class="px-2 pt-7 pb-32 bg-white md:px-0">
+    <div class="container items-center max-w-6xl px-8 mx-auto xl:px-5">
+        <div class="flex flex-wrap items-center sm:-mx-3">
+            <p class="mx-auto text-base text-gray-500 lg:text-xl">
+                Privacy Meter is an open-source library to audit data privacy in statistical and machine learning
+                algorithms. The tool can help in data protection impact assessment process by providing a quantitative
+                analysis of fundamental privacy risks of a (machine learning) model. It uses state-of-the-art inference
+                techniques to audit a wide range of machine learning algorithms for classification, regression, computer
+                vision, and natural language processing. Privacy Meter generates extensive reports about the aggregate
+                and individual privacy risks for data records in the training set, at multiple levels of access to the model.
+            </p>
+        </div>
+    </div>
+</section>
+
+<!-- Section 3: compatibility -->
 <section class="bg-white pt-7 pb-14">
     <div class="container px-8 mx-auto sm:px-12 lg:px-20">
-        <h1 class="text-sm font-bold tracking-wide text-center text-gray-800 uppercase mb-7">Compatible with major ML frameworks</h1>
-        <div class="flex grid items-center justify-center grid-cols-4 grid-cols-10 gap-y-8">
+        <h1 class="text-sm font-bold tracking-wide text-center text-gray-800 uppercase mb-12">Compatible with major ML frameworks</h1>
+        <div class="flex grid items-center justify-center grid-cols-4 grid-cols-8 gap-y-8">
             <div class="flex items-center justify-center col-span-10 md:col-span-5 xl:col-span-2">
                 <img src="images/logo_tf.png" alt="tensorflow" class="block object-contain h-12">
             </div>
             <div class="flex items-center justify-center col-span-10 md:col-span-5 xl:col-span-2">
                 <img src="images/logo_pytorch.png" alt="pytorch" class="block object-contain h-9">
-            </div>
-            <div class="flex items-center justify-center col-span-10 md:col-span-5 xl:col-span-2">
-                <img src="images/logo_keras.png" alt="keras" class="block object-contain h-9">
             </div>
             <div class="flex items-center justify-center col-span-10 md:col-span-5 xl:col-span-2">
                 <img src="images/logo_hugging_face.png" alt="hugging face" class="block object-contain h-7 lg:h-8">
@@ -125,7 +138,7 @@
     </div>
 </section> -->
 
-<!-- Section 4 -->
+<!-- Section 4: features -->
 <section class="py-20 bg-white">
     <div class="container max-w-6xl mx-auto">
         <h2 class="text-4xl font-bold tracking-tight text-center">Features</h2>
@@ -133,29 +146,6 @@
         <div class="grid grid-cols-4 gap-8 mt-10 sm:grid-cols-8 lg:grid-cols-12 sm:px-8 xl:px-0">
 
             <div class="relative flex flex-col items-center justify-between col-span-4 px-8 py-12 space-y-4 overflow-hidden bg-gray-100 sm:rounded-xl">
-                <div class="p-3 text-white bg-blue-500 rounded-full">
-                    <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            class="w-8 h-8 "
-                            viewBox="0 0 24 24"
-                            stroke-width="1.5"
-                            stroke="currentColor"
-                            fill="none"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                    >
-                        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                        <path d="M14 3v4a1 1 0 0 0 1 1h4"></path>
-                        <path d="M5 8v-3a2 2 0 0 1 2 -2h7l5 5v11a2 2 0 0 1 -2 2h-5"></path>
-                        <circle cx="6" cy="14" r="3"></circle>
-                        <path d="M4.5 17l-1.5 5l3 -1.5l3 1.5l-1.5 -5"></path>
-                    </svg>
-                </div>
-                <h4 class="text-xl font-medium text-gray-700">Various inference games</h4>
-                <p class="text-base text-center text-gray-500">Each of our plan will provide you and your team with certifications.</p>
-            </div>
-
-            <div class="flex flex-col items-center justify-between col-span-4 px-8 py-12 space-y-4 bg-gray-100 sm:rounded-xl">
                 <div class="p-3 text-white bg-blue-500 rounded-full">
                     <svg id="icon" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
                         <defs>
@@ -165,33 +155,14 @@
                                 }
                             </style>
                         </defs>
-                        <title>meter--alt</title>
-                        <path d="M30,20a13.8535,13.8535,0,0,0-2.2291-7.5288l-1.4452,1.4453A11.8917,11.8917,0,0,1,28,20Z"/>
-                        <path d="M28,9.414,26.5859,8,18.019,16.5669A3.9521,3.9521,0,0,0,16,16a4,4,0,1,0,4,4,3.9533,3.9533,0,0,0-.5669-2.0191ZM16,22a2,2,0,1,1,2-2A2.0023,2.0023,0,0,1,16,22Z"/>
-                        <path d="M16,8a11.9086,11.9086,0,0,1,6.0833,1.6743l1.4536-1.4536A13.9773,13.9773,0,0,0,2,20H4A12.0137,12.0137,0,0,1,16,8Z"/>
+                        <title>chart--3D</title>
+                        <path d="M28,23v3.5859l-5-5V15a1,1,0,0,0-.5527-.8945L17,11.3818V5.8281l2.5859,2.586L21,7,16,2,11,7l1.4141,1.4141L15,5.8281v5.5537L9.5527,14.1055A1,1,0,0,0,9,15v6.5859l-5,5V23H2v7H9V28H5.4141l4.7832-4.7832,5.3554,2.6777a1.001,1.001,0,0,0,.8946,0l5.3554-2.6777L26.5859,28H23v2h7V23Zm-13,.3818-4-2V16.6182l4,2Zm1-6.5L12.2363,15,16,13.1182,19.7637,15Zm5,4.5-4,2V18.6182l4-2Z"/>
                         <rect id="_Transparent_Rectangle_" data-name="&lt;Transparent Rectangle&gt;" class="cls-1" width="32" height="32"/>
                     </svg>
-                </div>
-                <h4 class="text-xl font-medium text-gray-700">Built-in metrics</h4>
-                <p class="text-base text-center text-gray-500">Send out notifications to all your customers to keep them engaged.</p>
-            </div>
 
-            <div class="flex flex-col items-center justify-between col-span-4 px-8 py-12 space-y-4 bg-gray-100 sm:rounded-xl">
-                <div class="p-3 text-white bg-blue-500 rounded-full">
-                    <svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
-                        <defs>
-                            <style>
-                                .cls-1 {
-                                    fill: none;
-                                }
-                            </style>
-                        </defs>
-                        <path d="M29.4148,21.6664,23.08,15.3305l6.3337-6.334a2,2,0,0,0,.0017-2.8281l-.0017-.002-3.58-3.58a2,2,0,0,0-2.8284-.0015l-.0017.0015L16.67,8.9194,10.3352,2.5839a2.0037,2.0037,0,0,0-2.8281.0005L2.5854,7.5063a2.0011,2.0011,0,0,0,0,2.8286l6.3338,6.3345L2,23.5883V30H8.4106l6.919-6.9194,6.3354,6.3364a2.0076,2.0076,0,0,0,2.8291,0l4.9207-4.9223A2.0011,2.0011,0,0,0,29.4148,21.6664Zm-5.0015-17.67,3.59,3.59L21.67,13.92l-3.59-3.59ZM8,28H4V24.4086L10.3291,18.08l3.677,3.6778Zm15.08.0035L4,8.9213,8.9219,4,12.71,7.7875,10.458,10.04l1.4153,1.4141,2.2507-2.252,4.1294,4.1294L16,15.5834l1.416,1.4141,2.2517-2.252,4.13,4.13-2.2517,2.251,1.4141,1.415L25.2117,20.29l2.7907,2.791Z" transform="translate(0 0)"/>
-                        <rect id="_Transparent_Rectangle_" data-name="&lt;Transparent Rectangle&gt;" class="cls-1" width="32" height="32"/>
-                    </svg>
                 </div>
-                <h4 class="text-xl font-medium text-gray-700">Customizable algorithms</h4>
-                <p class="text-base text-center text-gray-500">High-quality bundles of awesome tools to help you out.</p>
+                <h4 class="text-xl font-medium text-gray-700">Various inference games</h4>
+                <p class="text-base text-center text-gray-500">Privacy Meter supports auditing of the average privacy loss of a training algorithm, and of the privacy loss of a model. Privacy loss of a data record and worst-case privacy loss of a training algorithm are coming soon.</p>
             </div>
 
             <div class="flex flex-col items-center justify-between col-span-4 px-8 py-12 space-y-4 bg-gray-100 sm:rounded-xl">
@@ -212,12 +183,18 @@
                     </svg>
                 </div>
                 <h4 class="text-xl font-medium text-gray-700">Easy integration</h4>
-                <p class="text-base text-center text-gray-500">Developer tools to help grow your application and keep it up-to-date.</p>
+                <p class="text-base text-center text-gray-500">Privacy Meter supports many common libraries and workflows, so that you can use it out of the box. Your favorite library is not supported? Our wrapper classes will make it work within minutes.</p>
             </div>
 
             <div class="flex flex-col items-center justify-between col-span-4 px-8 py-12 space-y-4 bg-gray-100 sm:rounded-xl">
                 <div class="p-3 text-white bg-blue-500 rounded-full">
-                    <svg id="icon" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
+                    <svg
+                            id="icon"
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="32"
+                            height="32"
+                            viewBox="0 0 32 32"
+                    >
                         <defs>
                             <style>
                                 .cls-1 {
@@ -239,34 +216,87 @@
                     </svg>
                 </div>
                 <h4 class="text-xl font-medium text-gray-700">Reports generation</h4>
-                <p class="text-base text-center text-gray-500">The right kind of building blocks to take your company to the next level.</p>
+                <p class="text-base text-center text-gray-500">Easily create complete PDF reports to share with your team, or beautiful plots for your next paper.</p>
             </div>
 
             <div class="flex flex-col items-center justify-between col-span-4 px-8 py-12 space-y-4 bg-gray-100 sm:rounded-xl">
                 <div class="p-3 text-white bg-blue-500 rounded-full">
-                    <svg id="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><defs><style>.cls-1{fill:none;}</style></defs><title>event-schedule</title><path d="M21,30a8,8,0,1,1,8-8A8,8,0,0,1,21,30Zm0-14a6,6,0,1,0,6,6A6,6,0,0,0,21,16Z"/><polygon points="22.59 25 20 22.41 20 18 22 18 22 21.59 24 23.59 22.59 25"/><path d="M28,6a2,2,0,0,0-2-2H22V2H20V4H12V2H10V4H6A2,2,0,0,0,4,6V26a2,2,0,0,0,2,2h4V26H6V6h4V8h2V6h8V8h2V6h4v6h2Z"/><rect id="_Transparent_Rectangle_" data-name="&lt;Transparent Rectangle&gt;" class="cls-1" width="32" height="32"/></svg>
+                    <svg id="icon" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
+                        <defs>
+                            <style>
+                                .cls-1 {
+                                    fill: none;
+                                }
+                            </style>
+                        </defs>
+                        <title>meter--alt</title>
+                        <path d="M30,20a13.8535,13.8535,0,0,0-2.2291-7.5288l-1.4452,1.4453A11.8917,11.8917,0,0,1,28,20Z"/>
+                        <path d="M28,9.414,26.5859,8,18.019,16.5669A3.9521,3.9521,0,0,0,16,16a4,4,0,1,0,4,4,3.9533,3.9533,0,0,0-.5669-2.0191ZM16,22a2,2,0,1,1,2-2A2.0023,2.0023,0,0,1,16,22Z"/>
+                        <path d="M16,8a11.9086,11.9086,0,0,1,6.0833,1.6743l1.4536-1.4536A13.9773,13.9773,0,0,0,2,20H4A12.0137,12.0137,0,0,1,16,8Z"/>
+                        <rect id="_Transparent_Rectangle_" data-name="&lt;Transparent Rectangle&gt;" class="cls-1" width="32" height="32"/>
+                    </svg>
+                </div>
+                <h4 class="text-xl font-medium text-gray-700">Built-in metrics</h4>
+                <p class="text-base text-center text-gray-500">Out of the box metrics include the population metric, reference metric, and shadow metric. White-box metrics are coming soon.</p>
+            </div>
+
+            <div class="flex flex-col items-center justify-between col-span-4 px-8 py-12 space-y-4 bg-gray-100 sm:rounded-xl">
+                <div class="p-3 text-white bg-blue-500 rounded-full">
+                    <svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
+                        <defs>
+                            <style>
+                                .cls-1 {
+                                    fill: none;
+                                }
+                            </style>
+                        </defs>
+                        <path d="M29.4148,21.6664,23.08,15.3305l6.3337-6.334a2,2,0,0,0,.0017-2.8281l-.0017-.002-3.58-3.58a2,2,0,0,0-2.8284-.0015l-.0017.0015L16.67,8.9194,10.3352,2.5839a2.0037,2.0037,0,0,0-2.8281.0005L2.5854,7.5063a2.0011,2.0011,0,0,0,0,2.8286l6.3338,6.3345L2,23.5883V30H8.4106l6.919-6.9194,6.3354,6.3364a2.0076,2.0076,0,0,0,2.8291,0l4.9207-4.9223A2.0011,2.0011,0,0,0,29.4148,21.6664Zm-5.0015-17.67,3.59,3.59L21.67,13.92l-3.59-3.59ZM8,28H4V24.4086L10.3291,18.08l3.677,3.6778Zm15.08.0035L4,8.9213,8.9219,4,12.71,7.7875,10.458,10.04l1.4153,1.4141,2.2507-2.252,4.1294,4.1294L16,15.5834l1.416,1.4141,2.2517-2.252,4.13,4.13-2.2517,2.251,1.4141,1.415L25.2117,20.29l2.7907,2.791Z" transform="translate(0 0)"/>
+                        <rect id="_Transparent_Rectangle_" data-name="&lt;Transparent Rectangle&gt;" class="cls-1" width="32" height="32"/>
+                    </svg>
+                </div>
+                <h4 class="text-xl font-medium text-gray-700">Customizable algorithms</h4>
+                <p class="text-base text-center text-gray-500">The library is made of independent and interoperable classes, meaning you can easily overwrite one of them to change a specific aspect of the audit.</p>
+            </div>
+
+            <div class="flex flex-col items-center justify-between col-span-4 px-8 py-12 space-y-4 bg-gray-100 sm:rounded-xl">
+                <div class="p-3 text-white bg-blue-500 rounded-full">
+                    <svg
+                            id="icon"
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="32" height="32"
+                            viewBox="0 0 32 32"
+                    >
+                        <defs>
+                            <style>.cls-1{fill:none;}</style>
+                        </defs>
+                        <title>event-schedule</title>
+                        <path d="M21,30a8,8,0,1,1,8-8A8,8,0,0,1,21,30Zm0-14a6,6,0,1,0,6,6A6,6,0,0,0,21,16Z"/>
+                        <polygon points="22.59 25 20 22.41 20 18 22 18 22 21.59 24 23.59 22.59 25"/>
+                        <path d="M28,6a2,2,0,0,0-2-2H22V2H20V4H12V2H10V4H6A2,2,0,0,0,4,6V26a2,2,0,0,0,2,2h4V26H6V6h4V8h2V6h8V8h2V6h4v6h2Z"/>
+                        <rect id="_Transparent_Rectangle_" data-name="&lt;Transparent Rectangle&gt;" class="cls-1" width="32" height="32"/>
+                    </svg>
                 </div>
                 <h4 class="text-xl font-medium text-gray-700">Many more</h4>
-                <p class="text-base text-center text-gray-500">Coupons system to provide special offers and discounts for your app.</p>
+                <p class="text-base text-center text-gray-500">The Privacy Meter library is still a work in progress, so you can expect additional features soon!</p>
             </div>
 
         </div>
     </div>
 </section>
 
-<!-- Section 5 -->
+<!-- Section 5: our team -->
 <section class="relative py-20 overflow-hidden bg-white">
 
     <span class="absolute bottom-0 left-0"> </span>
 
     <div class="relative px-16 mx-auto max-w-7xl">
         <p class="font-medium tracking-wide text-blue-500 uppercase">OUR TEAM</p>
-        <h2 class="relative max-w-5xl mt-4 mb-10 text-4xl font-semibold leading-tight lg:text-5xl">From NUS Data Privacy and Trustworthy Machine Learning Research Lab</h2>
-        <div class="grid w-full grid-cols-2 gap-10 sm:grid-cols-3 lg:grid-cols-5">
+        <h2 class="relative max-w-5xl mt-4 mb-10 text-4xl font-semibold leading-tight lg:text-5xl">From the NUS Data Privacy and Trustworthy Machine Learning Research Lab</h2>
+        <div class="grid w-full grid-cols-2 gap-10 sm:grid-cols-3 lg:grid-cols-4">
             <div class="flex flex-col items-center justify-center col-span-1">
                 <div class="relative p-5">
-                    <div class="absolute z-10 w-full h-full -mt-5 -ml-5 rounded-full rounded-tr-none bg-blue-50"></div>
-                    <img class="relative z-20 w-full rounded-full" src="https://www.comp.nus.edu.sg/~reza/img/aadyaa.jpg">
+                    <div class="absolute z-10 w-full h-full -mt-5 -ml-5 rounded-full rounded-tr-none bg-green-50"></div>
+                    <img class="relative z-20 w-full rounded-full" src="images/aadyaa.jpg">
                 </div>
                 <div class="mt-3 space-y-2 text-center">
                     <div class="space-y-1 text-lg font-medium leading-6">
@@ -287,7 +317,7 @@
             <div class="flex flex-col items-center justify-center col-span-1">
                 <div class="relative p-5">
                     <div class="absolute z-10 w-full h-full -mt-5 -ml-5 rounded-full rounded-tr-none bg-green-50"></div>
-                    <img class="relative z-20 w-full rounded-full" src="https://www.comp.nus.edu.sg/~reza/img/jiayuan.jpg">
+                    <img class="relative z-20 w-full rounded-full" src="images/jiayuan.jpg">
                 </div>
                 <div class="mt-3 space-y-2 text-center">
                     <div class="space-y-1 text-lg font-medium leading-6">
@@ -307,29 +337,8 @@
 
             <div class="flex flex-col items-center justify-center col-span-1">
                 <div class="relative p-5">
-                    <div class="absolute z-10 w-full h-full -mt-5 -ml-5 rounded-full rounded-tr-none bg-pink-50"></div>
-                    <img class="relative z-20 w-full rounded-full" src="https://www.comp.nus.edu.sg/~reza/img/sasi.jpg">
-                </div>
-                <div class="mt-3 space-y-2 text-center">
-                    <div class="space-y-1 text-lg font-medium leading-6">
-                        <h3>Sasi Kumar Murakonda</h3>
-                        <p class="text-blue-600">Former Research Assistant</p>
-                    </div>
-                    <div class="relative flex items-center justify-center space-x-3">
-                        <a href="#_" class="text-gray-300 hover:text-gray-400">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 fill-current" viewBox="0 0 24 24"><path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z"></path></svg>
-                        </a>
-                        <a href="#_" class="text-gray-300 hover:text-gray-400">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 fill-current" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"></path></svg>
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="flex flex-col items-center justify-center col-span-1">
-                <div class="relative p-5">
                     <div class="absolute z-10 w-full h-full -mt-5 -ml-5 rounded-full rounded-tr-none bg-green-50"></div>
-                    <img class="relative z-20 w-full rounded-full" src="https://www.comp.nus.edu.sg/~reza/img/victor.jpg">
+                    <img class="relative z-20 w-full rounded-full" src="images/victor.jpg">
                 </div>
                 <div class="mt-3 space-y-2 text-center">
                     <div class="space-y-1 text-lg font-medium leading-6">
@@ -350,7 +359,70 @@
             <div class="flex flex-col items-center justify-center col-span-1">
                 <div class="relative p-5">
                     <div class="absolute z-10 w-full h-full -mt-5 -ml-5 rounded-full rounded-tr-none bg-green-50"></div>
-                    <img class="relative z-20 w-full rounded-full" src="https://www.comp.nus.edu.sg/~reza/img/reza.jpg">
+                    <img class="relative z-20 w-full rounded-full" src="images/fatemehsadat.jpg">
+                </div>
+                <div class="mt-3 space-y-2 text-center">
+                    <div class="space-y-1 text-lg font-medium leading-6">
+                        <h3>Fatemehsadat Mireshghallah</h3>
+                        <p class="text-blue-600">???</p>
+                    </div>
+                    <div class="relative flex items-center justify-center space-x-3">
+                        <a href="#_" class="text-gray-300 hover:text-gray-400">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 fill-current" viewBox="0 0 24 24"><path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z"></path></svg>
+                        </a>
+                        <a href="#_" class="text-gray-300 hover:text-gray-400">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 fill-current" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"></path></svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flex flex-col items-center justify-center col-span-1">
+                <div class="relative p-5">
+                    <div class="absolute z-10 w-full h-full -mt-5 -ml-5 rounded-full rounded-tr-none bg-green-50"></div>
+                    <img class="relative z-20 w-full rounded-full" src="images/hongyan.jpg">
+                </div>
+                <div class="mt-3 space-y-2 text-center">
+                    <div class="space-y-1 text-lg font-medium leading-6">
+                        <h3>Hongyan Chang</h3>
+                        <p class="text-blue-600">PhD Student</p>
+                    </div>
+                    <div class="relative flex items-center justify-center space-x-3">
+                        <a href="#_" class="text-gray-300 hover:text-gray-400">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 fill-current" viewBox="0 0 24 24"><path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z"></path></svg>
+                        </a>
+                        <a href="#_" class="text-gray-300 hover:text-gray-400">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 fill-current" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"></path></svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flex flex-col items-center justify-center col-span-1">
+                <div class="relative p-5">
+                    <div class="absolute z-10 w-full h-full -mt-5 -ml-5 rounded-full rounded-tr-none bg-green-50"></div>
+                    <img class="relative z-20 w-full rounded-full" src="images/martin.jpg">
+                </div>
+                <div class="mt-3 space-y-2 text-center">
+                    <div class="space-y-1 text-lg font-medium leading-6">
+                        <h3>Martin Strobel</h3>
+                        <p class="text-blue-600">PhD Student</p>
+                    </div>
+                    <div class="relative flex items-center justify-center space-x-3">
+                        <a href="#_" class="text-gray-300 hover:text-gray-400">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 fill-current" viewBox="0 0 24 24"><path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z"></path></svg>
+                        </a>
+                        <a href="#_" class="text-gray-300 hover:text-gray-400">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 fill-current" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"></path></svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flex flex-col items-center justify-center col-span-1">
+                <div class="relative p-5">
+                    <div class="absolute z-10 w-full h-full -mt-5 -ml-5 rounded-full rounded-tr-none bg-green-50"></div>
+                    <img class="relative z-20 w-full rounded-full" src="images/reza.jpg">
                 </div>
                 <div class="mt-3 space-y-2 text-center">
                     <div class="space-y-1 text-lg font-medium leading-6">
@@ -372,61 +444,29 @@
     </div>
 </section>
 
-<!-- Section 6 -->
+<!-- Section 6: tutorials -->
 <section class="bg-white">
     <div class="w-full px-5 py-6 mx-auto space-y-5 sm:py-8 md:py-12 sm:space-y-8 md:space-y-16 max-w-7xl">
 
-        <div class="flex flex-col items-center sm:px-5 md:flex-row">
-            <div class="w-full md:w-1/2">
-                <a href="#_" class="block">
-                    <img class="object-cover w-full h-full rounded-lg max-h-64 sm:max-h-96" src="https://cdn.devdojo.com/images/may2021/cupcakes.jpg">
-                </a>
-            </div>
-            <div class="flex flex-col items-start justify-center w-full h-full py-6 mb-6 md:mb-0 md:w-1/2">
-                <div class="flex flex-col items-start justify-center h-full space-y-3 transform md:pl-10 lg:pl-16 md:space-y-5">
-                    <div class="bg-pink-500 flex items-center pl-2 pr-3 py-1.5 leading-none rounded-full text-xs font-medium uppercase text-white inline-block">
-                        <svg class="w-3.5 h-3.5 mr-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
-                        <span>Featured</span>
-                    </div>
-                    <h1 class="text-4xl font-bold leading-none lg:text-5xl xl:text-6xl"><a href="#_">Savory Templates. Sweet Designs.</a></h1>
-                    <p class="pt-2 text-sm font-medium">by <a href="#_" class="mr-1 underline">John Doe</a> · <span class="mx-1">April 23rd, 2021</span> · <span class="mx-1 text-gray-600">5 min. read</span></p>
-                </div>
-            </div>
-        </div>
+        <h2 class="mb-4 text-xl font-bold md:text-3xl">
+            Featured tutorials
+        </h2>
 
         <div class="flex grid grid-cols-12 pb-10 sm:px-5 gap-x-8 gap-y-16">
             <div class="flex flex-col items-start col-span-12 space-y-3 sm:col-span-6 xl:col-span-4">
                 <a href="#_" class="block">
                     <img class="object-cover w-full mb-2 overflow-hidden rounded-lg shadow-sm max-h-56" src="https://cdn.devdojo.com/images/may2021/fruit.jpg">
                 </a>
-                <div class="bg-purple-500 flex items-center px-3 py-1.5 leading-none rounded-full text-xs font-medium uppercase text-white inline-block">
-                    <span>Lifestyle</span>
-                </div>
-                <h2 class="text-lg font-bold sm:text-xl md:text-2xl"><a href="#_">Creating a Future Worth Living</a></h2>
+                <h2 class="text-lg font-bold sm:text-xl md:text-2xl"><a href="#_">Using the population metric</a></h2>
                 <p class="text-sm text-gray-500">Learn the attributes you need to gain in order to build a future and create a life that you are truly happy with.</p>
                 <p class="pt-2 text-xs font-medium"><a href="#_" class="mr-1 underline">Mary Jane</a> · <span class="mx-1">April 17, 2021</span> · <span class="mx-1 text-gray-600">3 min. read</span></p>
             </div>
 
             <div class="flex flex-col items-start col-span-12 space-y-3 sm:col-span-6 xl:col-span-4">
                 <a href="#_" class="block">
-                    <img class="object-cover w-full mb-2 overflow-hidden rounded-lg shadow-sm max-h-56" src="https://cdn.devdojo.com/images/may2021/workout.jpg">
-                </a>
-                <div class="bg-pink-500 flex items-center px-3 py-1.5 leading-none rounded-full text-xs font-medium uppercase text-white inline-block">
-                    <span>Health</span>
-                </div>
-                <h2 class="text-lg font-bold sm:text-xl md:text-2xl">The Healther Version of Yourself</h2>
-                <p class="text-sm text-gray-500">If you want to excel in life and become a better version of yourself, you'll need to upgrade your life.</p>
-                <p class="pt-2 text-xs font-medium"><a href="#_" class="mr-1 underline">Fred Jones</a> · <span class="mx-1">April 10, 2021</span> · <span class="mx-1 text-gray-600">3 min. read</span></p>
-            </div>
-
-            <div class="flex flex-col items-start col-span-12 space-y-3 sm:col-span-6 xl:col-span-4">
-                <a href="#_" class="block">
                     <img class="object-cover w-full mb-2 overflow-hidden rounded-lg shadow-sm max-h-56" src="https://cdn.devdojo.com/images/may2021/food.jpg">
                 </a>
-                <div class="bg-red-500 flex items-center px-3 py-1.5 leading-none rounded-full text-xs font-medium uppercase text-white inline-block">
-                    <span>Food</span>
-                </div>
-                <h2 class="text-lg font-bold sm:text-xl md:text-2xl">Enjoy the Meals of the Kings</h2>
+                <h2 class="text-lg font-bold sm:text-xl md:text-2xl">Using the reference metric</h2>
                 <p class="text-sm text-gray-500">Take the time to enjoy the life that you've created. It's totally fine to live like kings and eat like royalty.</p>
                 <p class="pt-2 text-xs font-medium"><a href="#_" class="mr-1 underline">Mike Roberts</a> · <span class="mx-1">April 6, 2021</span> · <span class="mx-1 text-gray-600">3 min. read</span></p>
             </div>
@@ -435,10 +475,8 @@
                 <a href="#_" class="block">
                     <img class="object-cover w-full mb-2 overflow-hidden rounded-lg max-h-56" src="https://cdn.devdojo.com/images/may2021/books.jpg">
                 </a>
-                <div class="bg-blue-500 flex items-center px-3 py-1.5 leading-none rounded-full text-xs font-medium uppercase text-white inline-block">
-                    <span>Motivation</span>
-                </div>
-                <h2 class="text-lg font-bold sm:text-xl md:text-2xl">Writing for Success</h2>
+
+                <h2 class="text-lg font-bold sm:text-xl md:text-2xl">Using the shadow metric</h2>
                 <p class="text-sm text-gray-500">Writing about your plans for success is extremely helpful for yourself and it will allow you to share your story.</p>
                 <p class="pt-2 text-xs font-medium"><a href="#_" class="mr-1 underline">Tom Johnson</a> · <span class="mx-1">May 25, 2021</span> · <span class="mx-1 text-gray-600">3 min. read</span></p>
             </div>
@@ -447,9 +485,6 @@
                 <a href="#_" class="block">
                     <img class="object-cover w-full mb-2 overflow-hidden rounded-lg max-h-56" src="https://cdn.devdojo.com/images/may2021/clock.jpg">
                 </a>
-                <div class="bg-gray-800 flex items-center px-3 py-1.5 leading-none rounded-full text-xs font-medium uppercase text-white inline-block">
-                    <span>Business</span>
-                </div>
                 <h2 class="text-lg font-bold sm:text-xl md:text-2xl">Simple Time Management</h2>
                 <p class="text-sm text-gray-500">Managing your time can make the difference between getting ahead in life or staying exactly where you are.</p>
                 <p class="pt-2 text-xs font-medium"><a href="#_" class="mr-1 underline">Scott Reedman</a> · <span class="mx-1">May 18, 2021</span> · <span class="mx-1 text-gray-600">3 min. read</span></p>
@@ -459,9 +494,15 @@
                 <a href="#_" class="block">
                     <img class="object-cover w-full mb-2 overflow-hidden rounded-lg max-h-56" src="https://cdn.devdojo.com/images/may2021/lemons.jpg">
                 </a>
-                <div class="bg-yellow-400 flex items-center px-3 py-1.5 leading-none rounded-full text-xs font-medium uppercase text-white inline-block">
-                    <span>Nutrition</span>
-                </div>
+                <h2 class="text-lg font-bold sm:text-xl md:text-2xl">The Fruits Life</h2>
+                <p class="text-sm text-gray-500">Take a moment and enjoy to enjoy the many fruits of life. Relaxation and a healthy diet can go a long way.</p>
+                <p class="pt-2 text-xs font-medium"><a href="#_" class="mr-1 underline">Jake Caldwell</a> · <span class="mx-1">May 15, 2021</span> · <span class="mx-1 text-gray-600">3 min. read</span></p>
+            </div>
+
+            <div class="flex flex-col items-start col-span-12 space-y-3 sm:col-span-6 xl:col-span-4">
+                <a href="#_" class="block">
+                    <img class="object-cover w-full mb-2 overflow-hidden rounded-lg max-h-56" src="https://cdn.devdojo.com/images/may2021/lemons.jpg">
+                </a>
                 <h2 class="text-lg font-bold sm:text-xl md:text-2xl">The Fruits Life</h2>
                 <p class="text-sm text-gray-500">Take a moment and enjoy to enjoy the many fruits of life. Relaxation and a healthy diet can go a long way.</p>
                 <p class="pt-2 text-xs font-medium"><a href="#_" class="mr-1 underline">Jake Caldwell</a> · <span class="mx-1">May 15, 2021</span> · <span class="mx-1 text-gray-600">3 min. read</span></p>
@@ -471,26 +512,18 @@
     </div>
 </section>
 
-<!-- Section 7 -->
+<!-- Section 7: FAQ -->
 <section class="py-24 bg-white">
     <div class="px-8 mx-auto max-w-7xl lg:px-16">
         <h2 class="mb-4 text-xl font-bold md:text-3xl">Frequently Asked Questions</h2>
         <div class="grid grid-cols-1 gap-0 text-gray-600 md:grid-cols-2 md:gap-16">
             <div>
-                <h5 class="mt-10 mb-3 font-semibold text-gray-900">What is Tails</h5>
-                <p>Tails is a drag and drop page builder built on Top of TailwindCSS. You can drop components to create a page that you can export.</p>
-                <h5 class="mt-10 mb-3 font-semibold text-gray-900">Can I try it for Free?</h5>
-                <p>Absolutely, you can try out tails for free; however, if you wish to access all the components and export the page you'll need to upgrade your account.</p>
+                <h5 class="mt-10 mb-3 font-semibold text-gray-900">Which libraries are compatible?</h5>
+                <p>Out of the box, Privacy Meter is compatible with Tensorflow, Pytorch, HuggingFace, and OpenVino. Many other libraries can be used using a wrapper class.</p>
+                <h5 class="mt-10 mb-3 font-semibold text-gray-900">In what context can I use Privacy Meter?</h5>
+                <p>Privacy Meter is published under the MIT License. TLDR: Permissions include commercial use, modification, distribution, private use. It comes with no liability and no warranty, and you shall include license and copyright notice.</p>
                 <h5 class="mt-10 mb-3 font-semibold text-gray-900">Where do I go to upgrade my account?</h5>
-                <p>
-                    You can upgrade your account by visiting <a href="https://devdojo.com/pro" class="text-indigo-500 underline">The Pro Upgrade Page</a>. You will also gain access to many other applications and sections of the site.
-                    <a href="https://help.hellonext.co/faq/startup-eligibility/" target="_blank">here</a>.
-                </p>
-                <h5 class="mt-10 mb-3 font-semibold text-gray-900">How long will I have access to Tails</h5>
-                <p>
-                    You will have unlimited access to all your pre-built pages; however, if you want to be able to download and export your pages, you'll need a pro account.
-                    <a href="https://paddle.com" target="_blank">Paddle</a> for processing payments.
-                </p>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc tincidunt rutrum ligula sed fermentum. Quisque dignissim arcu sit amet metus fringilla cursus.</p>
             </div>
             <div>
                 <h5 class="mt-10 mb-3 font-semibold text-gray-900">How do I implement into my project</h5>
@@ -499,20 +532,19 @@
                 <p>You have unlimited use to the templates used in Tails; however, you cannot re-use the templates to sell for others to use.</p>
                 <h5 class="mt-10 mb-3 font-semibold text-gray-900">Can I cancel my account if I not longer need it?</h5>
                 <p>Of course, you can feel free to cancel your account at anytime, and you can feel free to come back and upgrade again whenever you're ready.</p>
-                <h5 class="mt-10 mb-3 font-semibold text-gray-900">What if I need help with my project?</h5>
-                <p>If you need assistance implementing the templates into your project you can contact support or you can visit our <a href="https://devdojo.com/questions" class="text-indigo-500 underline">question section</a>.
-                </p>
             </div>
         </div>
     </div>
 </section>
 
-<!-- Section 8 -->
+<!-- Section 8: footer -->
 <section class="text-gray-700 bg-white body-font">
     <div class="container flex flex-col items-center px-8 py-8 mx-auto max-w-7xl sm:flex-row">
-        <a href="#_" class="text-xl font-black leading-none text-gray-900 select-none logo">tails<span class="text-indigo-600">.</span></a>
-        <p class="mt-4 text-sm text-gray-500 sm:ml-4 sm:pl-4 sm:border-l sm:border-gray-200 sm:mt-0">© 2021 Tails - Tailwindcss Page Builder
-        </p>
+
+        <img src="images/logo.png" alt="privacy_meter logo" style="height: 30px; width: auto">
+
+        <p class="mt-4 text-sm text-gray-500 sm:ml-4 sm:pl-4 sm:border-l sm:border-gray-200 sm:mt-0">© 2022 NUS Data Privacy and Trustworthy Machine Learning Lab</p>
+
         <span class="inline-flex justify-center mt-4 space-x-5 sm:ml-auto sm:mt-0 sm:justify-start">
             <a href="#" class="text-gray-400 hover:text-gray-500">
                 <span class="sr-only">Facebook</span>

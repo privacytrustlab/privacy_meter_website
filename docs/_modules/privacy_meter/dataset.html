@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>privacy_meter.dataset &mdash; Privacy Meter 1.0.0 documentation</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../index.html" class="icon icon-home"> Privacy Meter
+          </a>
+              <div class="version">
+                1.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../modules.html">privacy_meter</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Privacy Meter</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../index.html">Module code</a> &raquo;</li>
+      <li>privacy_meter.dataset</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for privacy_meter.dataset</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">itertools</span> <span class="kn">import</span> <span class="n">product</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Union</span><span class="p">,</span> <span class="n">Dict</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+
+<div class="viewcode-block" id="Dataset"><a class="viewcode-back" href="../../privacy_meter.html#privacy_meter.dataset.Dataset">[docs]</a><span class="k">class</span> <span class="nc">Dataset</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Wrapper around a dictionary-like formatted dataset, with functions to run preprocessing, to define default</span>
+<span class="sd">    input/output features, and to split a dataset easily.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+                 <span class="n">data_dict</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span>
+                 <span class="n">default_input</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+                 <span class="n">default_output</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+                 <span class="n">preproc_fn_dict</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+                 <span class="n">preprocessed</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
+                 <span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Constructor</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            data_dict: Contains the dataset as a dict</span>
+<span class="sd">            default_input: The key of the data_dict that should be used by default to get the input of a model</span>
+<span class="sd">            default_output: The key of the data_dict that should be used by default to get the expected output</span>
+<span class="sd">                of a model</span>
+<span class="sd">            preproc_fn_dict: Contains optional preprocessing functions for each feature</span>
+<span class="sd">            preprocessed: Indicates if the preprocessing of preproc_fn_dict has already been applied</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="c1"># Store parameters</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">data_dict</span> <span class="o">=</span> <span class="n">data_dict</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">default_input</span> <span class="o">=</span> <span class="n">default_input</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">default_output</span> <span class="o">=</span> <span class="n">default_output</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">preproc_fn_dict</span> <span class="o">=</span> <span class="n">preproc_fn_dict</span>
+
+        <span class="c1"># Store splits names and features names</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">splits</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data_dict</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">features</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data_dict</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">splits</span><span class="p">[</span><span class="mi">0</span><span class="p">]])</span>
+
+        <span class="c1"># If preprocessing functions were passed as parameters, execute them</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">preprocessed</span> <span class="ow">and</span> <span class="n">preproc_fn_dict</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">preprocess</span><span class="p">()</span>
+
+<div class="viewcode-block" id="Dataset.preprocess"><a class="viewcode-back" href="../../privacy_meter.html#privacy_meter.dataset.Dataset.preprocess">[docs]</a>    <span class="k">def</span> <span class="nf">preprocess</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Preprocessing function, executed by the constructor, based on the preproc_fn_dict attribute.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">for</span> <span class="p">(</span><span class="n">split</span><span class="p">,</span> <span class="n">feature</span><span class="p">)</span> <span class="ow">in</span> <span class="n">product</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">splits</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">features</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">feature</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">preproc_fn_dict</span><span class="p">):</span>
+                <span class="n">fn</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">preproc_fn_dict</span><span class="p">[</span><span class="n">feature</span><span class="p">]</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">data_dict</span><span class="p">[</span><span class="n">split</span><span class="p">][</span><span class="n">feature</span><span class="p">]</span> <span class="o">=</span> <span class="n">fn</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data_dict</span><span class="p">[</span><span class="n">split</span><span class="p">][</span><span class="n">feature</span><span class="p">])</span></div>
+
+<div class="viewcode-block" id="Dataset.get_feature"><a class="viewcode-back" href="../../privacy_meter.html#privacy_meter.dataset.Dataset.get_feature">[docs]</a>    <span class="k">def</span> <span class="nf">get_feature</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+                    <span class="n">split_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+                    <span class="n">feature_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+                    <span class="n">indices</span><span class="p">:</span> <span class="nb">list</span> <span class="o">=</span> <span class="kc">None</span>
+                    <span class="p">):</span>
+
+        <span class="sd">&quot;&quot;&quot;Returns a specific feature from samples of a specific split.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            split_name: Name of the split</span>
+<span class="sd">            feature_name: Name of the feature</span>
+<span class="sd">            indices: Optional list of indices. If not specified, the entire subset is returned.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            The requested feature, from samples of the requested split.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="c1"># Two placeholders can be used to trigger either the default input or the default output, as specified during</span>
+        <span class="c1"># object creation</span>
+        <span class="k">if</span> <span class="n">feature_name</span> <span class="o">==</span> <span class="s1">&#39;&lt;default_input&gt;&#39;</span><span class="p">:</span>
+            <span class="n">feature_name</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">default_input</span>
+        <span class="k">elif</span> <span class="n">feature_name</span> <span class="o">==</span> <span class="s1">&#39;&lt;default_output&gt;&#39;</span><span class="p">:</span>
+            <span class="n">feature_name</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">default_output</span>
+
+        <span class="c1"># If &#39;indices&#39; is not specified, returns the entire array. Else just return those indices</span>
+        <span class="k">if</span> <span class="n">indices</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">data_dict</span><span class="p">[</span><span class="n">split_name</span><span class="p">][</span><span class="n">feature_name</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">data_dict</span><span class="p">[</span><span class="n">split_name</span><span class="p">][</span><span class="n">feature_name</span><span class="p">][</span><span class="n">indices</span><span class="p">]</span></div>
+
+<div class="viewcode-block" id="Dataset.subdivide"><a class="viewcode-back" href="../../privacy_meter.html#privacy_meter.dataset.Dataset.subdivide">[docs]</a>    <span class="k">def</span> <span class="nf">subdivide</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+                  <span class="n">num_splits</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+                  <span class="n">split_names</span><span class="p">:</span> <span class="nb">list</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+                  <span class="n">method</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;independent&#39;</span><span class="p">,</span>
+                  <span class="n">split_size</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+                  <span class="n">delete_original</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+                  <span class="n">in_place</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+                  <span class="n">return_results</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
+                  <span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Subdivides the splits contained in split_names into sub-splits, e.g. for shadow model training.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            num_splits: Number of sub-splits per original split.</span>
+<span class="sd">            split_names: The splits to subdivide (e.g. train and test). By default, includes all splits.</span>
+<span class="sd">            method: Either independent or random. If method is independent, then the sub-splits are a partition of the</span>
+<span class="sd">                original split (i.e. they contain the entire split without repetition). If method is random, then each</span>
+<span class="sd">                sub-split is a random subset of the original split (i.e. some samples might be missing or repeated). If</span>
+<span class="sd">                method is hybrid, then each sub-split is a random subset of the original split, with the guarantee that</span>
+<span class="sd">                the 1st one is not overlapping with the others.</span>
+<span class="sd">            split_size: If method is random, this is the size of one split (ignored if method is independent). Can</span>
+<span class="sd">                either be an integer, or a dictionary of integer (one per split).</span>
+<span class="sd">            delete_original: Indicates if the original split should be deleted.</span>
+<span class="sd">            in_place: Indicates if the new splits should be included in the parent object or not</span>
+<span class="sd">            return_results: Indicates if the new splits should be returned or not</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            If in_place, a list of new Dataset objects, with the sub-splits. Otherwise, nothing, as the results are</span>
+<span class="sd">            stored in self.data_dict.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="c1"># By default, includes all splits.</span>
+        <span class="k">if</span> <span class="n">split_names</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">split_names</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">splits</span>
+
+        <span class="c1"># List of results if in_place is False</span>
+        <span class="n">new_datasets_dict</span> <span class="o">=</span> <span class="p">[{}</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_splits</span><span class="p">)]</span>
+
+        <span class="k">for</span> <span class="n">split</span> <span class="ow">in</span> <span class="n">split_names</span><span class="p">:</span>
+
+            <span class="k">if</span> <span class="n">split_size</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">parsed_split_size</span> <span class="o">=</span> <span class="n">split_size</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">split_size</span><span class="p">,</span> <span class="nb">int</span><span class="p">)</span> <span class="k">else</span> <span class="n">split_size</span><span class="p">[</span><span class="n">split</span><span class="p">]</span>
+
+            <span class="c1"># If method is random, then each sub-split is a random subset of the original split.</span>
+            <span class="k">if</span> <span class="n">method</span> <span class="o">==</span> <span class="s1">&#39;random&#39;</span><span class="p">:</span>
+                <span class="k">assert</span> <span class="n">split_size</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">,</span> <span class="s1">&#39;Argument split_size is required when method is &quot;random&quot; or &quot;hybrid&quot;&#39;</span>
+                <span class="n">indices</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data_dict</span><span class="p">[</span><span class="n">split</span><span class="p">][</span><span class="bp">self</span><span class="o">.</span><span class="n">features</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="n">num_splits</span><span class="p">,</span> <span class="n">parsed_split_size</span><span class="p">))</span>
+
+            <span class="c1"># If method is independent, then the sub-splits are a partition of the original split.</span>
+            <span class="k">elif</span> <span class="n">method</span> <span class="o">==</span> <span class="s1">&#39;independent&#39;</span><span class="p">:</span>
+                <span class="n">indices</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data_dict</span><span class="p">[</span><span class="n">split</span><span class="p">][</span><span class="bp">self</span><span class="o">.</span><span class="n">features</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+                <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">shuffle</span><span class="p">(</span><span class="n">indices</span><span class="p">)</span>
+                <span class="n">indices</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array_split</span><span class="p">(</span><span class="n">indices</span><span class="p">,</span> <span class="n">num_splits</span><span class="p">)</span>
+
+            <span class="c1"># If method is hybrid, then each sub-split is a random subset of the original split, with the guarantee that</span>
+            <span class="c1"># the 1st one is not overlapping with the others</span>
+            <span class="k">elif</span> <span class="n">method</span> <span class="o">==</span> <span class="s1">&#39;hybrid&#39;</span><span class="p">:</span>
+                <span class="k">assert</span> <span class="n">split_size</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">,</span> <span class="s1">&#39;Argument split_size is required when method is &quot;random&quot; or &quot;hybrid&quot;&#39;</span>
+                <span class="n">available_indices</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data_dict</span><span class="p">[</span><span class="n">split</span><span class="p">][</span><span class="bp">self</span><span class="o">.</span><span class="n">features</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+                <span class="n">indices_a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">available_indices</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">parsed_split_size</span><span class="p">),</span> <span class="n">replace</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+                <span class="n">available_indices</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">setdiff1d</span><span class="p">(</span><span class="n">available_indices</span><span class="p">,</span> <span class="n">indices_a</span><span class="o">.</span><span class="n">flatten</span><span class="p">())</span>
+                <span class="n">indices_b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">available_indices</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="n">num_splits</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">parsed_split_size</span><span class="p">),</span> <span class="n">replace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+                <span class="n">indices</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">((</span><span class="n">indices_a</span><span class="p">,</span> <span class="n">indices_b</span><span class="p">))</span>
+
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Split method &quot;</span><span class="si">{</span><span class="n">method</span><span class="si">}</span><span class="s1">&quot; does not exist.&#39;</span><span class="p">)</span>
+
+            <span class="k">for</span> <span class="n">split_n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_splits</span><span class="p">):</span>
+                <span class="c1"># Fill the dictionary if in_place is True</span>
+                <span class="k">if</span> <span class="n">in_place</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">data_dict</span><span class="p">[</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">split</span><span class="si">}{</span><span class="n">split_n</span><span class="si">:</span><span class="s1">03d</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+                    <span class="k">for</span> <span class="n">feature</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">features</span><span class="p">:</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">data_dict</span><span class="p">[</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">split</span><span class="si">}{</span><span class="n">split_n</span><span class="si">:</span><span class="s1">03d</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">][</span><span class="n">feature</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">data_dict</span><span class="p">[</span><span class="n">split</span><span class="p">][</span><span class="n">feature</span><span class="p">][</span><span class="n">indices</span><span class="p">[</span><span class="n">split_n</span><span class="p">]]</span>
+                <span class="c1"># Create new dictionaries if return_results is True</span>
+                <span class="k">if</span> <span class="n">return_results</span><span class="p">:</span>
+                    <span class="n">new_datasets_dict</span><span class="p">[</span><span class="n">split_n</span><span class="p">][</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">split</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+                    <span class="k">for</span> <span class="n">feature</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">features</span><span class="p">:</span>
+                        <span class="n">new_datasets_dict</span><span class="p">[</span><span class="n">split_n</span><span class="p">][</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">split</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">][</span><span class="n">feature</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">data_dict</span><span class="p">[</span><span class="n">split</span><span class="p">][</span><span class="n">feature</span><span class="p">][</span><span class="n">indices</span><span class="p">[</span><span class="n">split_n</span><span class="p">]]</span>
+
+            <span class="c1"># delete_original indicates if the original split should be deleted.</span>
+            <span class="k">if</span> <span class="n">delete_original</span><span class="p">:</span>
+                <span class="k">del</span> <span class="bp">self</span><span class="o">.</span><span class="n">data_dict</span><span class="p">[</span><span class="n">split</span><span class="p">]</span>
+
+        <span class="c1"># Update the list of splits</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">splits</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data_dict</span><span class="p">)</span>
+
+        <span class="c1"># Return new datasets if return_results is True</span>
+        <span class="k">if</span> <span class="n">return_results</span><span class="p">:</span>
+            <span class="k">return</span> <span class="p">[</span>
+                <span class="n">Dataset</span><span class="p">(</span>
+                    <span class="n">data_dict</span><span class="o">=</span><span class="n">new_datasets_dict</span><span class="p">[</span><span class="n">i</span><span class="p">],</span>
+                    <span class="n">default_input</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">default_input</span><span class="p">,</span>
+                    <span class="n">default_output</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">default_output</span><span class="p">,</span>
+                    <span class="n">preproc_fn_dict</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">preproc_fn_dict</span><span class="p">,</span>
+                    <span class="n">preprocessed</span><span class="o">=</span><span class="kc">True</span>
+                <span class="p">)</span>
+                <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_splits</span><span class="p">)</span>
+            <span class="p">]</span></div>
+
+    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Return a string describing the dataset</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">txt</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="s2">&quot; DATASET OBJECT &quot;</span><span class="si">:</span><span class="s1">=^48</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span>
+            <span class="sa">f</span><span class="s1">&#39;Splits            = </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">splits</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span>
+            <span class="sa">f</span><span class="s1">&#39;Features          = </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">features</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span>
+            <span class="sa">f</span><span class="s1">&#39;Default features  = </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">default_input</span><span class="si">}</span><span class="s1"> --&gt; </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">default_output</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;=&#39;</span> <span class="o">*</span> <span class="mi">48</span>
+        <span class="p">]</span>
+        <span class="k">return</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">txt</span><span class="p">)</span></div>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, Data Privacy and Trustworthy Machine Learning Research Lab.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

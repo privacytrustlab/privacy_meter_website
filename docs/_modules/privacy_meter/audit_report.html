@@ -1,0 +1,708 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>privacy_meter.audit_report &mdash; Privacy Meter 1.0.0 documentation</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../index.html" class="icon icon-home"> Privacy Meter
+          </a>
+              <div class="version">
+                1.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../modules.html">privacy_meter</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Privacy Meter</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../index.html">Module code</a> &raquo;</li>
+      <li>privacy_meter.audit_report</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for privacy_meter.audit_report</h1><div class="highlight"><pre>
+<span></span><span class="c1">########################################################################################################################</span>
+<span class="c1"># IMPORTS</span>
+<span class="c1">########################################################################################################################</span>
+
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">subprocess</span>
+<span class="kn">from</span> <span class="nn">abc</span> <span class="kn">import</span> <span class="n">ABC</span><span class="p">,</span> <span class="n">abstractmethod</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span><span class="p">,</span> <span class="n">Union</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">,</span> <span class="n">Dict</span>
+<span class="kn">import</span> <span class="nn">json</span>
+
+<span class="kn">import</span> <span class="nn">jinja2</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sn</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">date</span>
+<span class="kn">from</span> <span class="nn">PIL</span> <span class="kn">import</span> <span class="n">Image</span>
+<span class="kn">from</span> <span class="nn">scipy</span> <span class="kn">import</span> <span class="n">interpolate</span>
+
+<span class="kn">from</span> <span class="nn">privacy_meter.constants</span> <span class="kn">import</span> <span class="n">InferenceGame</span>
+<span class="kn">from</span> <span class="nn">privacy_meter.information_source</span> <span class="kn">import</span> <span class="n">InformationSource</span>
+<span class="kn">from</span> <span class="nn">privacy_meter.information_source_signal</span> <span class="kn">import</span> <span class="n">DatasetSample</span>
+<span class="kn">from</span> <span class="nn">privacy_meter.metric_result</span> <span class="kn">import</span> <span class="n">MetricResult</span>
+
+
+<span class="c1">########################################################################################################################</span>
+<span class="c1"># GLOBAL SETTINGS</span>
+<span class="c1">########################################################################################################################</span>
+
+<span class="c1"># Temporary parameter pointing to the report_file directory (for compatibility)</span>
+<span class="n">REPORT_FILES_DIR</span> <span class="o">=</span> <span class="s2">&quot;report_files&quot;</span>
+
+<span class="c1"># Configure jinja for LaTex</span>
+<span class="n">latex_jinja_env</span> <span class="o">=</span> <span class="n">jinja2</span><span class="o">.</span><span class="n">Environment</span><span class="p">(</span>
+    <span class="n">block_start_string</span><span class="o">=</span><span class="s1">&#39;\BLOCK{&#39;</span><span class="p">,</span>
+    <span class="n">block_end_string</span><span class="o">=</span><span class="s1">&#39;}&#39;</span><span class="p">,</span>
+    <span class="n">variable_start_string</span><span class="o">=</span><span class="s1">&#39;\VAR{&#39;</span><span class="p">,</span>
+    <span class="n">variable_end_string</span><span class="o">=</span><span class="s1">&#39;}&#39;</span><span class="p">,</span>
+    <span class="n">comment_start_string</span><span class="o">=</span><span class="s1">&#39;\#{&#39;</span><span class="p">,</span>
+    <span class="n">comment_end_string</span><span class="o">=</span><span class="s1">&#39;}&#39;</span><span class="p">,</span>
+    <span class="n">line_statement_prefix</span><span class="o">=</span><span class="s1">&#39;</span><span class="si">%%</span><span class="s1">&#39;</span><span class="p">,</span>
+    <span class="n">line_comment_prefix</span><span class="o">=</span><span class="s1">&#39;%#&#39;</span><span class="p">,</span>
+    <span class="n">trim_blocks</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">autoescape</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+    <span class="n">loader</span><span class="o">=</span><span class="n">jinja2</span><span class="o">.</span><span class="n">FileSystemLoader</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">))</span>
+<span class="p">)</span>
+
+<span class="c1">########################################################################################################################</span>
+<span class="c1"># AUDIT_REPORT CLASS</span>
+<span class="c1">########################################################################################################################</span>
+
+
+<div class="viewcode-block" id="AuditReport"><a class="viewcode-back" href="../../privacy_meter.html#privacy_meter.audit_report.AuditReport">[docs]</a><span class="k">class</span> <span class="nc">AuditReport</span><span class="p">(</span><span class="n">ABC</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    An abstract class to display and/or save some elements of a metric result object.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="AuditReport.generate_report"><a class="viewcode-back" href="../../privacy_meter.html#privacy_meter.audit_report.AuditReport.generate_report">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span> <span class="nf">generate_report</span><span class="p">(</span>
+            <span class="n">metric_result</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">MetricResult</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="n">MetricResult</span><span class="p">],</span> <span class="nb">dict</span><span class="p">],</span>
+            <span class="n">inference_game_type</span><span class="p">:</span> <span class="n">InferenceGame</span>
+    <span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Core function of the AuditReport class, that actually generates the report.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            metric_result: MetricResult object, containing data for the report.</span>
+<span class="sd">            inference_game_type: Value from the InferenceGame ENUM type, indicating which inference game was used.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">pass</span></div></div>
+
+
+<span class="c1">########################################################################################################################</span>
+<span class="c1"># ROC_CURVE_REPORT CLASS</span>
+<span class="c1">########################################################################################################################</span>
+
+
+<div class="viewcode-block" id="ROCCurveReport"><a class="viewcode-back" href="../../privacy_meter.html#privacy_meter.audit_report.ROCCurveReport">[docs]</a><span class="k">class</span> <span class="nc">ROCCurveReport</span><span class="p">(</span><span class="n">AuditReport</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Inherits of the AuditReport class, an interface class to display and/or save some elements of a metric result</span>
+<span class="sd">    object. This particular class is used to generate a ROC (Receiver Operating Characteristic) curve.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">__avg_roc</span><span class="p">(</span>
+            <span class="n">fpr_2d_list</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">float</span><span class="p">]],</span>
+            <span class="n">tpr_2d_list</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">float</span><span class="p">]],</span>
+            <span class="n">n</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">200</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">]:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Private helper function, to average a ROC curve from non-aligned list.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            fpr_2d_list: A 2D list of fpr values</span>
+<span class="sd">            tpr_2d_list: A 2D list of fpr values</span>
+<span class="sd">            n: Number of points in the resulting lists</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            A tuple of aligned 1D numpy arrays, fpr and tpr.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">functions</span> <span class="o">=</span> <span class="p">[</span><span class="n">interpolate</span><span class="o">.</span><span class="n">interp1d</span><span class="p">(</span><span class="n">fpr</span><span class="p">,</span> <span class="n">tpr</span><span class="p">)</span> <span class="k">for</span> <span class="p">(</span><span class="n">fpr</span><span class="p">,</span> <span class="n">tpr</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">fpr_2d_list</span><span class="p">,</span> <span class="n">tpr_2d_list</span><span class="p">)]</span>
+        <span class="n">fpr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
+        <span class="n">tpr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">([</span><span class="n">f</span><span class="p">(</span><span class="n">fpr</span><span class="p">)</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">functions</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">fpr</span><span class="p">,</span> <span class="n">tpr</span>
+
+<div class="viewcode-block" id="ROCCurveReport.generate_report"><a class="viewcode-back" href="../../privacy_meter.html#privacy_meter.audit_report.ROCCurveReport.generate_report">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">generate_report</span><span class="p">(</span>
+            <span class="n">metric_result</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">MetricResult</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="n">MetricResult</span><span class="p">],</span> <span class="n">List</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="n">MetricResult</span><span class="p">]]],</span>
+            <span class="n">inference_game_type</span><span class="p">:</span> <span class="n">InferenceGame</span><span class="p">,</span>
+            <span class="n">show</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+            <span class="n">save</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+            <span class="n">filename</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;roc_curve.jpg&#39;</span>
+    <span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Core function of the AuditReport class, that actually generates the report.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            metric_result: A list of MetricResult objects, containing data for the report.</span>
+<span class="sd">            inference_game_type: Value from the InferenceGame ENUM type, indicating which inference game was used.</span>
+<span class="sd">            show: Boolean specifying if the plot should be displayed on screen.</span>
+<span class="sd">            save: Boolean specifying if the plot should be saved as a file.</span>
+<span class="sd">            filename: File name to be used if the plot is saved as a file.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="c1"># Casts type to a 2D list</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">metric_result</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
+            <span class="n">metric_result</span> <span class="o">=</span> <span class="p">[</span><span class="n">metric_result</span><span class="p">]</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">metric_result</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="nb">list</span><span class="p">):</span>
+            <span class="n">metric_result</span> <span class="o">=</span> <span class="p">[</span><span class="n">metric_result</span><span class="p">]</span>
+
+        <span class="c1"># Read and store the explanation dict</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">REPORT_FILES_DIR</span><span class="si">}</span><span class="s1">/explanations.json&#39;</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+            <span class="n">explanations</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+
+        <span class="c1"># Computes fpr, tpr and auc in different ways, depending on the available information and inference game</span>
+        <span class="k">if</span> <span class="n">inference_game_type</span> <span class="o">==</span> <span class="n">InferenceGame</span><span class="o">.</span><span class="n">PRIVACY_LOSS_MODEL</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">metric_result</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">predictions_proba</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">fpr</span> <span class="o">=</span> <span class="p">[</span><span class="n">mr</span><span class="o">.</span><span class="n">fp</span> <span class="o">/</span> <span class="p">(</span><span class="n">mr</span><span class="o">.</span><span class="n">fp</span> <span class="o">+</span> <span class="n">mr</span><span class="o">.</span><span class="n">tn</span><span class="p">)</span> <span class="k">for</span> <span class="n">mr</span> <span class="ow">in</span> <span class="n">metric_result</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span>
+                <span class="n">tpr</span> <span class="o">=</span> <span class="p">[</span><span class="n">mr</span><span class="o">.</span><span class="n">tp</span> <span class="o">/</span> <span class="p">(</span><span class="n">mr</span><span class="o">.</span><span class="n">tp</span> <span class="o">+</span> <span class="n">mr</span><span class="o">.</span><span class="n">fn</span><span class="p">)</span> <span class="k">for</span> <span class="n">mr</span> <span class="ow">in</span> <span class="n">metric_result</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span>
+                <span class="n">roc_auc</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">trapz</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">fpr</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">tpr</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">fpr</span><span class="p">,</span> <span class="n">tpr</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">metric_result</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">roc</span>
+                <span class="n">roc_auc</span> <span class="o">=</span> <span class="n">metric_result</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">roc_auc</span>
+        <span class="k">elif</span> <span class="n">inference_game_type</span> <span class="o">==</span> <span class="n">InferenceGame</span><span class="o">.</span><span class="n">AVG_PRIVACY_LOSS_TRAINING_ALGO</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">metric_result</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">predictions_proba</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">fpr</span> <span class="o">=</span> <span class="p">[[</span><span class="n">metric_result</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span><span class="o">.</span><span class="n">fp</span> <span class="o">/</span> <span class="p">(</span><span class="n">metric_result</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span><span class="o">.</span><span class="n">fp</span> <span class="o">+</span> <span class="n">metric_result</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span><span class="o">.</span><span class="n">tn</span><span class="p">)</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">metric_result</span><span class="p">[</span><span class="mi">0</span><span class="p">]))]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">metric_result</span><span class="p">))]</span>
+                <span class="n">tpr</span> <span class="o">=</span> <span class="p">[[</span><span class="n">metric_result</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span><span class="o">.</span><span class="n">tp</span> <span class="o">/</span> <span class="p">(</span><span class="n">metric_result</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span><span class="o">.</span><span class="n">tp</span> <span class="o">+</span> <span class="n">metric_result</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span><span class="o">.</span><span class="n">fn</span><span class="p">)</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">metric_result</span><span class="p">[</span><span class="mi">0</span><span class="p">]))]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">metric_result</span><span class="p">))]</span>
+                <span class="n">fpr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">fpr</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+                <span class="n">tpr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">tpr</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+                <span class="n">roc_auc</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">trapz</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">fpr</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">tpr</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">fpr</span><span class="p">,</span> <span class="n">tpr</span> <span class="o">=</span> <span class="n">ROCCurveReport</span><span class="o">.</span><span class="n">__avg_roc</span><span class="p">(</span>
+                    <span class="n">fpr_2d_list</span><span class="o">=</span><span class="p">[</span><span class="n">metric_result</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">roc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">metric_result</span><span class="p">))],</span>
+                    <span class="n">tpr_2d_list</span><span class="o">=</span><span class="p">[</span><span class="n">metric_result</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">roc</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">metric_result</span><span class="p">))]</span>
+                <span class="p">)</span>
+                <span class="n">roc_auc</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">trapz</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">fpr</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">tpr</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">NotImplementedError</span>
+
+        <span class="c1"># Gets metric ID</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">metric_result</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">metric_result</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="nb">list</span><span class="p">):</span>
+                <span class="n">metric_id</span> <span class="o">=</span> <span class="n">metric_result</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">metric_id</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">metric_id</span> <span class="o">=</span> <span class="n">metric_result</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">metric_id</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">metric_id</span> <span class="o">=</span> <span class="n">metric_result</span><span class="o">.</span><span class="n">metric_id</span>
+
+        <span class="c1"># Generate plot</span>
+        <span class="n">range01</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">fill_between</span><span class="p">(</span><span class="n">fpr</span><span class="p">,</span> <span class="n">tpr</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.15</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">fpr</span><span class="p">,</span> <span class="n">tpr</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="n">explanations</span><span class="p">[</span><span class="s2">&quot;metric&quot;</span><span class="p">][</span><span class="n">metric_id</span><span class="p">][</span><span class="s2">&quot;name&quot;</span><span class="p">])</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">range01</span><span class="p">,</span> <span class="n">range01</span><span class="p">,</span> <span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Random guess&#39;</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;False positive rate (FPR)&#39;</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;True positive rate (TPR)&#39;</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;ROC curve&#39;</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">text</span><span class="p">(</span>
+            <span class="mf">0.7</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">,</span>
+            <span class="sa">f</span><span class="s1">&#39;AUC = </span><span class="si">{</span><span class="n">roc_auc</span><span class="si">:</span><span class="s1">.03f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span>
+            <span class="n">horizontalalignment</span><span class="o">=</span><span class="s1">&#39;center&#39;</span><span class="p">,</span>
+            <span class="n">verticalalignment</span><span class="o">=</span><span class="s1">&#39;center&#39;</span><span class="p">,</span>
+            <span class="n">bbox</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">facecolor</span><span class="o">=</span><span class="s1">&#39;white&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+        <span class="p">)</span>
+        <span class="k">if</span> <span class="n">save</span><span class="p">:</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">fname</span><span class="o">=</span><span class="n">filename</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">show</span><span class="p">:</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">clf</span><span class="p">()</span></div></div>
+
+
+<span class="c1">########################################################################################################################</span>
+<span class="c1"># CONFUSION_MATRIX_REPORT CLASS</span>
+<span class="c1">########################################################################################################################</span>
+
+
+<div class="viewcode-block" id="ConfusionMatrixReport"><a class="viewcode-back" href="../../privacy_meter.html#privacy_meter.audit_report.ConfusionMatrixReport">[docs]</a><span class="k">class</span> <span class="nc">ConfusionMatrixReport</span><span class="p">(</span><span class="n">AuditReport</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Inherits of the AuditReport class, an interface class to display and/or save some elements of a metric result</span>
+<span class="sd">    object. This particular class is used to generate a confusion matrix.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="ConfusionMatrixReport.generate_report"><a class="viewcode-back" href="../../privacy_meter.html#privacy_meter.audit_report.ConfusionMatrixReport.generate_report">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">generate_report</span><span class="p">(</span>
+            <span class="n">metric_result</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">MetricResult</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="n">MetricResult</span><span class="p">]],</span>
+            <span class="n">inference_game_type</span><span class="p">:</span> <span class="n">InferenceGame</span><span class="p">,</span>
+            <span class="n">show</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+            <span class="n">save</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+            <span class="n">filename</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;confusion_matrix.jpg&#39;</span>
+    <span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Core function of the AuditReport class, that actually generates the report.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            metric_result: MetricResult object, containing data for the report.</span>
+<span class="sd">            inference_game_type: Value from the InferenceGame ENUM type, indicating which inference game was used.</span>
+<span class="sd">            show: Boolean specifying if the plot should be displayed on screen.</span>
+<span class="sd">            save: Boolean specifying if the plot should be saved as a file.</span>
+<span class="sd">            filename: File name to be used if the plot is saved as a file.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">if</span> <span class="n">inference_game_type</span> <span class="o">==</span> <span class="n">InferenceGame</span><span class="o">.</span><span class="n">PRIVACY_LOSS_MODEL</span><span class="p">:</span>
+            <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">metric_result</span><span class="p">,</span> <span class="n">MetricResult</span><span class="p">)</span>
+            <span class="n">cm</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="n">metric_result</span><span class="o">.</span><span class="n">tn</span><span class="p">,</span> <span class="n">metric_result</span><span class="o">.</span><span class="n">fp</span><span class="p">],</span> <span class="p">[</span><span class="n">metric_result</span><span class="o">.</span><span class="n">fn</span><span class="p">,</span> <span class="n">metric_result</span><span class="o">.</span><span class="n">tp</span><span class="p">]])</span>
+        <span class="k">elif</span> <span class="n">inference_game_type</span> <span class="o">==</span> <span class="n">InferenceGame</span><span class="o">.</span><span class="n">AVG_PRIVACY_LOSS_TRAINING_ALGO</span><span class="p">:</span>
+            <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">metric_result</span><span class="p">,</span> <span class="nb">list</span><span class="p">)</span>
+            <span class="n">cm</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">([[[</span><span class="n">mr</span><span class="o">.</span><span class="n">tn</span><span class="p">,</span> <span class="n">mr</span><span class="o">.</span><span class="n">fp</span><span class="p">],</span> <span class="p">[</span><span class="n">mr</span><span class="o">.</span><span class="n">fn</span><span class="p">,</span> <span class="n">mr</span><span class="o">.</span><span class="n">tp</span><span class="p">]]</span> <span class="k">for</span> <span class="n">mr</span> <span class="ow">in</span> <span class="n">metric_result</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">NotImplementedError</span>
+
+        <span class="n">cm</span> <span class="o">=</span> <span class="mi">100</span> <span class="o">*</span> <span class="n">cm</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">cm</span><span class="p">)</span>
+        <span class="n">index</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Non-member&quot;</span><span class="p">,</span> <span class="s2">&quot;Member&quot;</span><span class="p">]</span>
+        <span class="n">df_cm</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">cm</span><span class="p">,</span> <span class="n">index</span><span class="p">,</span> <span class="n">index</span><span class="p">)</span>
+        <span class="n">sn</span><span class="o">.</span><span class="n">heatmap</span><span class="p">(</span><span class="n">df_cm</span><span class="p">,</span> <span class="n">annot</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">cm</span><span class="o">.</span><span class="n">Blues</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Predicted label&#39;</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;True label&#39;</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Confusion matrix (in %)&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">save</span><span class="p">:</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">fname</span><span class="o">=</span><span class="n">filename</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">show</span><span class="p">:</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">clf</span><span class="p">()</span></div></div>
+
+
+<span class="c1">########################################################################################################################</span>
+<span class="c1"># SIGNAL_HISTOGRAM_REPORT CLASS</span>
+<span class="c1">########################################################################################################################</span>
+
+
+<div class="viewcode-block" id="SignalHistogramReport"><a class="viewcode-back" href="../../privacy_meter.html#privacy_meter.audit_report.SignalHistogramReport">[docs]</a><span class="k">class</span> <span class="nc">SignalHistogramReport</span><span class="p">(</span><span class="n">AuditReport</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Inherits of the AuditReport class, an interface class to display and/or save some elements of a metric result</span>
+<span class="sd">    object. This particular class is used to generate a histogram of the signal values.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="SignalHistogramReport.generate_report"><a class="viewcode-back" href="../../privacy_meter.html#privacy_meter.audit_report.SignalHistogramReport.generate_report">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">generate_report</span><span class="p">(</span>
+            <span class="n">metric_result</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">MetricResult</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="n">MetricResult</span><span class="p">]],</span>
+            <span class="n">inference_game_type</span><span class="p">:</span> <span class="n">InferenceGame</span><span class="p">,</span>
+            <span class="n">show</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+            <span class="n">save</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+            <span class="n">filename</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;signal_histogram.jpg&#39;</span>
+    <span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Core function of the AuditReport class, that actually generates the report.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            metric_result: MetricResult object, containing data for the report.</span>
+<span class="sd">            inference_game_type: Value from the InferenceGame ENUM type, indicating which inference game was used.</span>
+<span class="sd">            show: Boolean specifying if the plot should be displayed on screen.</span>
+<span class="sd">            save: Boolean specifying if the plot should be saved as a file.</span>
+<span class="sd">            filename: File name to be used if the plot is saved as a file.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">if</span> <span class="n">inference_game_type</span> <span class="o">==</span> <span class="n">InferenceGame</span><span class="o">.</span><span class="n">PRIVACY_LOSS_MODEL</span><span class="p">:</span>
+            <span class="n">values</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">metric_result</span><span class="o">.</span><span class="n">signal_values</span><span class="p">)</span><span class="o">.</span><span class="n">ravel</span><span class="p">()</span>
+            <span class="n">labels</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">metric_result</span><span class="o">.</span><span class="n">true_labels</span><span class="p">)</span><span class="o">.</span><span class="n">ravel</span><span class="p">()</span>
+            <span class="n">threshold</span> <span class="o">=</span> <span class="n">metric_result</span><span class="o">.</span><span class="n">threshold</span>
+        <span class="k">elif</span> <span class="n">inference_game_type</span> <span class="o">==</span> <span class="n">InferenceGame</span><span class="o">.</span><span class="n">AVG_PRIVACY_LOSS_TRAINING_ALGO</span><span class="p">:</span>
+            <span class="n">values</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">([</span><span class="n">mr</span><span class="o">.</span><span class="n">signal_values</span> <span class="k">for</span> <span class="n">mr</span> <span class="ow">in</span> <span class="n">metric_result</span><span class="p">])</span><span class="o">.</span><span class="n">ravel</span><span class="p">()</span>
+            <span class="n">labels</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">([</span><span class="n">mr</span><span class="o">.</span><span class="n">true_labels</span> <span class="k">for</span> <span class="n">mr</span> <span class="ow">in</span> <span class="n">metric_result</span><span class="p">])</span><span class="o">.</span><span class="n">ravel</span><span class="p">()</span>
+            <span class="n">threshold_list</span> <span class="o">=</span> <span class="p">[</span><span class="n">mr</span><span class="o">.</span><span class="n">threshold</span> <span class="k">for</span> <span class="n">mr</span> <span class="ow">in</span> <span class="n">metric_result</span><span class="p">]</span>
+            <span class="n">threshold</span> <span class="o">=</span> <span class="kc">None</span> <span class="k">if</span> <span class="kc">None</span> <span class="ow">in</span> <span class="n">threshold_list</span> <span class="k">else</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">threshold_list</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">NotImplementedError</span>
+
+        <span class="n">histogram</span> <span class="o">=</span> <span class="n">sn</span><span class="o">.</span><span class="n">histplot</span><span class="p">(</span>
+            <span class="n">data</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+                <span class="s1">&#39;Signal&#39;</span><span class="p">:</span> <span class="n">values</span><span class="p">,</span>
+                <span class="s1">&#39;Membership&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;Member&#39;</span> <span class="k">if</span> <span class="n">y</span> <span class="o">==</span> <span class="mi">1</span> <span class="k">else</span> <span class="s1">&#39;Non-member&#39;</span> <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="n">labels</span><span class="p">]</span>
+            <span class="p">}),</span>
+            <span class="n">x</span><span class="o">=</span><span class="s1">&#39;Signal&#39;</span><span class="p">,</span>
+            <span class="n">hue</span><span class="o">=</span><span class="s1">&#39;Membership&#39;</span><span class="p">,</span>
+            <span class="n">element</span><span class="o">=</span><span class="s1">&#39;step&#39;</span><span class="p">,</span>
+            <span class="n">kde</span><span class="o">=</span><span class="kc">True</span>
+        <span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">threshold</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">histogram</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span>
+                <span class="n">x</span><span class="o">=</span><span class="n">threshold</span><span class="p">,</span>
+                <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span>
+                <span class="n">color</span><span class="o">=</span><span class="s2">&quot;C</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+            <span class="p">)</span>
+            <span class="n">histogram</span><span class="o">.</span><span class="n">text</span><span class="p">(</span>
+                <span class="n">x</span><span class="o">=</span><span class="n">threshold</span> <span class="o">-</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">values</span><span class="p">)</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">values</span><span class="p">))</span><span class="o">/</span><span class="mi">30</span><span class="p">,</span>
+                <span class="n">y</span><span class="o">=</span><span class="mf">.8</span><span class="p">,</span>
+                <span class="n">s</span><span class="o">=</span><span class="s1">&#39;Threshold&#39;</span><span class="p">,</span>
+                <span class="n">rotation</span><span class="o">=</span><span class="mi">90</span><span class="p">,</span>
+                <span class="n">color</span><span class="o">=</span><span class="s2">&quot;C</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span>
+                <span class="n">transform</span><span class="o">=</span><span class="n">histogram</span><span class="o">.</span><span class="n">get_xaxis_transform</span><span class="p">()</span>
+            <span class="p">)</span>
+
+        <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Signal value&#39;</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Number of samples&#39;</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Signal histogram&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">save</span><span class="p">:</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">fname</span><span class="o">=</span><span class="n">filename</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">show</span><span class="p">:</span>
+            <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">clf</span><span class="p">()</span></div></div>
+
+
+<span class="c1">########################################################################################################################</span>
+<span class="c1"># VULNERABLE_POINTS_REPORT CLASS</span>
+<span class="c1">########################################################################################################################</span>
+
+
+<div class="viewcode-block" id="VulnerablePointsReport"><a class="viewcode-back" href="../../privacy_meter.html#privacy_meter.audit_report.VulnerablePointsReport">[docs]</a><span class="k">class</span> <span class="nc">VulnerablePointsReport</span><span class="p">(</span><span class="n">AuditReport</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Inherits of the AuditReport class, an interface class to display and/or save some elements of a metric result</span>
+<span class="sd">    object. This particular class is used to identify the most vulnerable points.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="VulnerablePointsReport.generate_report"><a class="viewcode-back" href="../../privacy_meter.html#privacy_meter.audit_report.VulnerablePointsReport.generate_report">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">generate_report</span><span class="p">(</span>
+            <span class="n">metric_results</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">MetricResult</span><span class="p">],</span>
+            <span class="n">inference_game_type</span><span class="p">:</span> <span class="n">InferenceGame</span><span class="p">,</span>
+            <span class="n">target_info_source</span><span class="p">:</span> <span class="n">InformationSource</span><span class="p">,</span>
+            <span class="n">target_model_to_train_split_mapping</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]],</span>
+            <span class="n">number_of_points</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">10</span><span class="p">,</span>
+            <span class="n">save_tex</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+            <span class="n">filename</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;vulnerable_points.tex&#39;</span><span class="p">,</span>
+            <span class="n">return_raw_values</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+            <span class="n">point_type</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;any&#39;</span>
+    <span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Core function of the AuditReport class, that actually generates the report.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            metric_results: A dict of lists of MetricResult objects, containing data for the report.</span>
+<span class="sd">            target_info_source: The InformationSource associated with the audited model training</span>
+<span class="sd">            target_model_to_train_split_mapping: The mapping associated with target_info_source</span>
+<span class="sd">            number_of_points: Number of vulnerable to be selected</span>
+<span class="sd">            save_tex: Boolean specifying if a partial .tex file should be generated</span>
+<span class="sd">            filename: Filename of the partial .tex file</span>
+<span class="sd">            return_raw_values: Boolean specifying if the points indices and scores should be returned</span>
+<span class="sd">            point_type: Can be &quot;any&quot; or &quot;image&quot;. If &quot;image&quot;, then the images are displayed as such in the report.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Indices of the vulnerable points and their scores</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">if</span> <span class="n">inference_game_type</span> <span class="o">!=</span> <span class="n">InferenceGame</span><span class="o">.</span><span class="n">PRIVACY_LOSS_MODEL</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">&quot;For now, the only inference_game_type supported is InferenceGame.PRIVACY_LOSS_MODEL&quot;</span><span class="p">)</span>
+
+        <span class="c1"># Objects to be returned if return_raw_values is True</span>
+        <span class="n">indices</span><span class="p">,</span> <span class="n">scores</span> <span class="o">=</span> <span class="p">[],</span> <span class="p">[]</span>
+
+        <span class="c1"># If only one metric was used (i.e. we have access to the prediction probabilities)</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">metric_results</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">mr</span> <span class="o">=</span> <span class="n">metric_results</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="c1"># Sort the training points that were identified as such by their prediction probabilities</span>
+            <span class="n">adjusted_values</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span>
+                <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">mr</span><span class="o">.</span><span class="n">predicted_labels</span><span class="p">)</span> <span class="o">==</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">mr</span><span class="o">.</span><span class="n">true_labels</span><span class="p">))</span>
+                <span class="o">&amp;</span>
+                <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">mr</span><span class="o">.</span><span class="n">true_labels</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span>
+                <span class="p">,</span>
+                <span class="o">-</span> <span class="n">mr</span><span class="o">.</span><span class="n">predictions_proba</span>
+                <span class="p">,</span>
+                <span class="mi">10</span>
+            <span class="p">)</span>
+            <span class="n">indices</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argsort</span><span class="p">(</span><span class="n">adjusted_values</span><span class="p">)[:</span><span class="n">number_of_points</span><span class="p">]</span>
+            <span class="c1"># Get the associated scores</span>
+            <span class="n">scores</span> <span class="o">=</span> <span class="n">mr</span><span class="o">.</span><span class="n">predictions_proba</span><span class="p">[</span><span class="n">indices</span><span class="p">]</span>
+
+        <span class="c1"># If multiple metrics were used (i.e. we don&#39;t have access to the prediction probabilities)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="c1"># Use the various metric, from the one with lowest fpr to the one with highest fpr</span>
+            <span class="n">fp_indices</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argsort</span><span class="p">([</span><span class="n">mr</span><span class="o">.</span><span class="n">fp</span> <span class="k">for</span> <span class="n">mr</span> <span class="ow">in</span> <span class="n">metric_results</span><span class="p">])</span>
+            <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">metric_results</span><span class="p">)):</span>
+                <span class="n">mr</span> <span class="o">=</span> <span class="n">metric_results</span><span class="p">[</span><span class="n">fp_indices</span><span class="p">[</span><span class="n">k</span><span class="p">]]</span>
+                <span class="c1"># Get the training points that were identified as such</span>
+                <span class="n">new_indices</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argwhere</span><span class="p">(</span>
+                    <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">mr</span><span class="o">.</span><span class="n">predicted_labels</span><span class="p">)</span> <span class="o">==</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">mr</span><span class="o">.</span><span class="n">true_labels</span><span class="p">))</span>
+                    <span class="o">&amp;</span>
+                    <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">mr</span><span class="o">.</span><span class="n">true_labels</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span>
+                <span class="p">)</span>
+                <span class="n">indices</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">new_indices</span><span class="o">.</span><span class="n">ravel</span><span class="p">()))</span>
+                <span class="c1"># Get the associated scores</span>
+                <span class="n">fpr</span> <span class="o">=</span> <span class="n">mr</span><span class="o">.</span><span class="n">fp</span> <span class="o">/</span> <span class="p">(</span><span class="n">mr</span><span class="o">.</span><span class="n">fp</span> <span class="o">+</span> <span class="n">mr</span><span class="o">.</span><span class="n">tn</span><span class="p">)</span>
+                <span class="n">scores</span><span class="o">.</span><span class="n">extend</span><span class="p">([</span><span class="mi">1</span><span class="o">-</span><span class="n">fpr</span><span class="p">]</span> <span class="o">*</span> <span class="n">new_indices</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+            <span class="c1"># Only keep number_of_points points</span>
+            <span class="n">indices</span><span class="p">,</span> <span class="n">scores</span> <span class="o">=</span> <span class="n">indices</span><span class="p">[:</span><span class="n">number_of_points</span><span class="p">],</span> <span class="n">scores</span><span class="p">[:</span><span class="n">number_of_points</span><span class="p">]</span>
+
+        <span class="c1"># Map indices stored in the metric_result object to indices in the training set</span>
+        <span class="n">indices_to_train_indices</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">counter</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">metric_results</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">true_labels</span><span class="p">):</span>
+            <span class="n">indices_to_train_indices</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">counter</span><span class="p">)</span>
+            <span class="n">counter</span> <span class="o">+=</span> <span class="n">v</span>
+        <span class="n">indices</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">indices_to_train_indices</span><span class="p">)[</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">indices</span><span class="p">)]</span>
+
+        <span class="c1"># If points are images and we are creating a LaTex file, then we read the information source to create image</span>
+        <span class="c1"># files from the vulnerable</span>
+        <span class="k">if</span> <span class="n">save_tex</span> <span class="ow">and</span> <span class="n">point_type</span> <span class="o">==</span> <span class="s2">&quot;image&quot;</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">point</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">indices</span><span class="p">):</span>
+                <span class="n">x</span> <span class="o">=</span> <span class="n">target_info_source</span><span class="o">.</span><span class="n">get_signal</span><span class="p">(</span>
+                    <span class="n">signal</span><span class="o">=</span><span class="n">DatasetSample</span><span class="p">(),</span>
+                    <span class="n">model_to_split_mapping</span><span class="o">=</span><span class="n">target_model_to_train_split_mapping</span><span class="p">,</span>
+                    <span class="n">extra</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;model_num&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;point_num&quot;</span><span class="p">:</span> <span class="n">point</span><span class="p">}</span>
+                <span class="p">)</span>
+                <span class="n">Image</span><span class="o">.</span><span class="n">fromarray</span><span class="p">((</span><span class="n">x</span><span class="o">*</span><span class="mi">255</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;uint8&#39;</span><span class="p">))</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;point</span><span class="si">{</span><span class="n">k</span><span class="si">:</span><span class="s1">03d</span><span class="si">}</span><span class="s1">.jpg&#39;</span><span class="p">)</span>
+
+        <span class="c1"># If we are creating a LaTex</span>
+        <span class="k">if</span> <span class="n">save_tex</span><span class="p">:</span>
+
+            <span class="c1"># Load template</span>
+            <span class="n">template</span> <span class="o">=</span> <span class="n">latex_jinja_env</span><span class="o">.</span><span class="n">get_template</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">REPORT_FILES_DIR</span><span class="si">}</span><span class="s1">/vulnerable_points_template.tex&#39;</span><span class="p">)</span>
+
+            <span class="c1"># Render the template (i.e. generate the corresponding string)</span>
+            <span class="n">latex_content</span> <span class="o">=</span> <span class="n">template</span><span class="o">.</span><span class="n">render</span><span class="p">(</span>
+                <span class="n">points</span><span class="o">=</span><span class="p">[</span>
+                    <span class="p">{</span><span class="s2">&quot;index&quot;</span><span class="p">:</span> <span class="n">index</span><span class="p">,</span> <span class="s2">&quot;score&quot;</span><span class="p">:</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">score</span><span class="si">:</span><span class="s1">.3f</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span> <span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="n">point_type</span><span class="p">,</span> <span class="s2">&quot;path&quot;</span><span class="p">:</span> <span class="sa">f</span><span class="s2">&quot;point</span><span class="si">{</span><span class="n">k</span><span class="si">:</span><span class="s2">03d</span><span class="si">}</span><span class="s2">.jpg&quot;</span> <span class="k">if</span> <span class="n">point_type</span> <span class="o">==</span> <span class="s2">&quot;image&quot;</span> <span class="k">else</span> <span class="kc">None</span><span class="p">}</span>
+                    <span class="k">for</span> <span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="p">(</span><span class="n">index</span><span class="p">,</span> <span class="n">score</span><span class="p">))</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">indices</span><span class="p">,</span> <span class="n">scores</span><span class="p">))</span>
+                <span class="p">]</span>
+            <span class="p">)</span>
+
+            <span class="c1"># Write the result (the string) to a .tex file</span>
+            <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+                <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">latex_content</span><span class="p">)</span>
+
+        <span class="c1"># If we required the values to be returned</span>
+        <span class="k">if</span> <span class="n">return_raw_values</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">indices</span><span class="p">,</span> <span class="n">scores</span></div></div>
+
+
+<span class="c1">########################################################################################################################</span>
+<span class="c1"># PDF_REPORT CLASS</span>
+<span class="c1">########################################################################################################################</span>
+
+
+<div class="viewcode-block" id="PDFReport"><a class="viewcode-back" href="../../privacy_meter.html#privacy_meter.audit_report.PDFReport">[docs]</a><span class="k">class</span> <span class="nc">PDFReport</span><span class="p">(</span><span class="n">AuditReport</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Inherits of the AuditReport class, an interface class to display and/or save some elements of a metric result</span>
+<span class="sd">    object. This particular class is used to generate a user-friendly report, with multiple plots and some explanations.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="PDFReport.generate_report"><a class="viewcode-back" href="../../privacy_meter.html#privacy_meter.audit_report.PDFReport.generate_report">[docs]</a>    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">generate_report</span><span class="p">(</span>
+            <span class="n">metric_results</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Union</span><span class="p">[</span><span class="n">MetricResult</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="n">MetricResult</span><span class="p">],</span> <span class="n">List</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="n">MetricResult</span><span class="p">]]]],</span>
+            <span class="n">inference_game_type</span><span class="p">:</span> <span class="n">InferenceGame</span><span class="p">,</span>
+            <span class="n">figures_dict</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span>
+            <span class="n">system_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+            <span class="n">call_pdflatex</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+            <span class="n">show</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+            <span class="n">save</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+            <span class="n">filename_no_extension</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;report&#39;</span><span class="p">,</span>
+            <span class="n">target_info_source</span><span class="p">:</span> <span class="n">InformationSource</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+            <span class="n">target_model_to_train_split_mapping</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+            <span class="n">point_type</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;any&#39;</span>
+    <span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Core function of the AuditReport class, that actually generates the report.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            metric_results: A dict of lists of MetricResult objects, containing data for the report.</span>
+<span class="sd">            inference_game_type: Value from the InferenceGame ENUM type, indicating which inference game was used.</span>
+<span class="sd">            figures_dict: A dictionary containing the figures to include, for each metric result.</span>
+<span class="sd">                E.g. {&quot;shadow_metric&quot;: [&quot;roc_curve&quot;, &quot;confusion_matrix&quot;, &quot;signal_histogram&quot;]}</span>
+<span class="sd">            system_name: Name of the system being audited. E.g. &quot;Purchase100 classifier&quot;</span>
+<span class="sd">            call_pdflatex: Boolean to specify if the pdflatex compiler should be called (to get a PDF file from the</span>
+<span class="sd">                TEX file)</span>
+<span class="sd">            show: Boolean specifying if the plot should be displayed on screen.</span>
+<span class="sd">            save: Boolean specifying if the plot should be saved as a file.</span>
+<span class="sd">            filename_no_extension: File name to be used if the plot is saved as a file, without the file extension.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">for</span> <span class="n">metric</span> <span class="ow">in</span> <span class="n">metric_results</span><span class="p">:</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">metric_results</span><span class="p">[</span><span class="n">metric</span><span class="p">],</span> <span class="nb">list</span><span class="p">):</span>
+                <span class="n">metric_results</span><span class="p">[</span><span class="n">metric</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">metric_results</span><span class="p">[</span><span class="n">metric</span><span class="p">]]</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">metric_results</span><span class="p">[</span><span class="n">metric</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="nb">list</span><span class="p">):</span>
+                <span class="n">metric_results</span><span class="p">[</span><span class="n">metric</span><span class="p">]</span> <span class="o">=</span> <span class="p">[[</span><span class="n">mr</span><span class="p">]</span> <span class="k">for</span> <span class="n">mr</span> <span class="ow">in</span> <span class="n">metric_results</span><span class="p">[</span><span class="n">metric</span><span class="p">]]</span>
+
+        <span class="c1"># Read and store the explanation dict</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">REPORT_FILES_DIR</span><span class="si">}</span><span class="s1">/explanations.json&#39;</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+            <span class="n">explanations</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+
+        <span class="c1"># Generate all plots, and save their filenames</span>
+        <span class="n">files_dict</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">for</span> <span class="n">metric</span> <span class="ow">in</span> <span class="n">metric_results</span><span class="p">:</span>
+            <span class="n">files_dict</span><span class="p">[</span><span class="n">metric</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="n">metric_results</span><span class="p">[</span><span class="n">metric</span><span class="p">]</span>
+
+            <span class="c1"># Select one instance to display when necessary (e.g. for a confusion matrix with a PopulationMetric)</span>
+            <span class="k">if</span> <span class="n">inference_game_type</span> <span class="o">==</span> <span class="n">InferenceGame</span><span class="o">.</span><span class="n">PRIVACY_LOSS_MODEL</span><span class="p">:</span>
+                <span class="n">best_index</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">([</span><span class="n">r</span><span class="o">.</span><span class="n">accuracy</span> <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">result</span><span class="p">])</span>
+                <span class="n">best_result</span> <span class="o">=</span> <span class="n">result</span><span class="p">[</span><span class="n">best_index</span><span class="p">]</span>
+            <span class="k">elif</span> <span class="n">inference_game_type</span> <span class="o">==</span> <span class="n">InferenceGame</span><span class="o">.</span><span class="n">AVG_PRIVACY_LOSS_TRAINING_ALGO</span><span class="p">:</span>
+                <span class="n">best_indices</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">([[</span><span class="n">r2</span><span class="o">.</span><span class="n">accuracy</span> <span class="k">for</span> <span class="n">r2</span> <span class="ow">in</span> <span class="n">r1</span><span class="p">]</span> <span class="k">for</span> <span class="n">r1</span> <span class="ow">in</span> <span class="n">result</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+                <span class="n">best_result</span> <span class="o">=</span> <span class="p">[</span><span class="n">result</span><span class="p">[</span><span class="n">k</span><span class="p">][</span><span class="n">best_index</span><span class="p">]</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">best_index</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">best_indices</span><span class="p">)]</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">NotImplementedError</span>
+
+            <span class="k">if</span> <span class="s1">&#39;roc_curve&#39;</span> <span class="ow">in</span> <span class="n">figures_dict</span><span class="p">[</span><span class="n">metric</span><span class="p">]:</span>
+                <span class="n">figure</span> <span class="o">=</span> <span class="s1">&#39;roc_curve&#39;</span>
+                <span class="n">filename</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">metric</span><span class="si">}</span><span class="s1">_</span><span class="si">{</span><span class="n">figure</span><span class="si">}</span><span class="s1">.jpg&#39;</span>
+                <span class="n">files_dict</span><span class="p">[</span><span class="n">metric</span><span class="p">][</span><span class="n">figure</span><span class="p">]</span> <span class="o">=</span> <span class="n">filename</span>
+                <span class="n">ROCCurveReport</span><span class="o">.</span><span class="n">generate_report</span><span class="p">(</span>
+                    <span class="n">metric_result</span><span class="o">=</span><span class="n">result</span><span class="p">,</span>
+                    <span class="n">inference_game_type</span><span class="o">=</span><span class="n">inference_game_type</span><span class="p">,</span>
+                    <span class="n">filename</span><span class="o">=</span><span class="n">filename</span>
+                <span class="p">)</span>
+            <span class="k">if</span> <span class="s1">&#39;confusion_matrix&#39;</span> <span class="ow">in</span> <span class="n">figures_dict</span><span class="p">[</span><span class="n">metric</span><span class="p">]:</span>
+                <span class="n">figure</span> <span class="o">=</span> <span class="s1">&#39;confusion_matrix&#39;</span>
+                <span class="n">filename</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">metric</span><span class="si">}</span><span class="s1">_</span><span class="si">{</span><span class="n">figure</span><span class="si">}</span><span class="s1">.jpg&#39;</span>
+                <span class="n">files_dict</span><span class="p">[</span><span class="n">metric</span><span class="p">][</span><span class="n">figure</span><span class="p">]</span> <span class="o">=</span> <span class="n">filename</span>
+                <span class="n">ConfusionMatrixReport</span><span class="o">.</span><span class="n">generate_report</span><span class="p">(</span>
+                    <span class="n">metric_result</span><span class="o">=</span><span class="n">best_result</span><span class="p">,</span>
+                    <span class="n">inference_game_type</span><span class="o">=</span><span class="n">inference_game_type</span><span class="p">,</span>
+                    <span class="n">filename</span><span class="o">=</span><span class="n">filename</span>
+                <span class="p">)</span>
+            <span class="k">if</span> <span class="s1">&#39;signal_histogram&#39;</span> <span class="ow">in</span> <span class="n">figures_dict</span><span class="p">[</span><span class="n">metric</span><span class="p">]:</span>
+                <span class="n">figure</span> <span class="o">=</span> <span class="s1">&#39;signal_histogram&#39;</span>
+                <span class="n">filename</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">metric</span><span class="si">}</span><span class="s1">_</span><span class="si">{</span><span class="n">figure</span><span class="si">}</span><span class="s1">.jpg&#39;</span>
+                <span class="n">files_dict</span><span class="p">[</span><span class="n">metric</span><span class="p">][</span><span class="n">figure</span><span class="p">]</span> <span class="o">=</span> <span class="n">filename</span>
+                <span class="n">SignalHistogramReport</span><span class="o">.</span><span class="n">generate_report</span><span class="p">(</span>
+                    <span class="n">metric_result</span><span class="o">=</span><span class="n">best_result</span><span class="p">,</span>
+                    <span class="n">inference_game_type</span><span class="o">=</span><span class="n">inference_game_type</span><span class="p">,</span>
+                    <span class="n">filename</span><span class="o">=</span><span class="n">filename</span>
+                <span class="p">)</span>
+            <span class="k">if</span> <span class="s1">&#39;vulnerable_points&#39;</span> <span class="ow">in</span> <span class="n">figures_dict</span><span class="p">[</span><span class="n">metric</span><span class="p">]:</span>
+                <span class="k">assert</span> <span class="n">target_info_source</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
+                <span class="k">assert</span> <span class="n">target_model_to_train_split_mapping</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
+                <span class="n">figure</span> <span class="o">=</span> <span class="s1">&#39;vulnerable_points&#39;</span>
+                <span class="n">filename</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">metric</span><span class="si">}</span><span class="s1">_</span><span class="si">{</span><span class="n">figure</span><span class="si">}</span><span class="s1">.tex&#39;</span>
+                <span class="n">files_dict</span><span class="p">[</span><span class="n">metric</span><span class="p">][</span><span class="n">figure</span><span class="p">]</span> <span class="o">=</span> <span class="n">filename</span>
+                <span class="n">VulnerablePointsReport</span><span class="o">.</span><span class="n">generate_report</span><span class="p">(</span>
+                    <span class="n">metric_results</span><span class="o">=</span><span class="n">result</span><span class="p">,</span>
+                    <span class="n">inference_game_type</span><span class="o">=</span><span class="n">inference_game_type</span><span class="p">,</span>
+                    <span class="n">save_tex</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                    <span class="n">filename</span><span class="o">=</span><span class="n">filename</span><span class="p">,</span>
+                    <span class="n">target_info_source</span><span class="o">=</span><span class="n">target_info_source</span><span class="p">,</span>
+                    <span class="n">target_model_to_train_split_mapping</span><span class="o">=</span><span class="n">target_model_to_train_split_mapping</span><span class="p">,</span>
+                    <span class="n">point_type</span><span class="o">=</span><span class="n">point_type</span>
+                <span class="p">)</span>
+
+        <span class="c1"># Load template</span>
+        <span class="n">template</span> <span class="o">=</span> <span class="n">latex_jinja_env</span><span class="o">.</span><span class="n">get_template</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">REPORT_FILES_DIR</span><span class="si">}</span><span class="s1">/report_template.tex&#39;</span><span class="p">)</span>
+
+        <span class="c1"># Render the template (i.e. generate the corresponding string)</span>
+        <span class="n">latex_content</span> <span class="o">=</span> <span class="n">template</span><span class="o">.</span><span class="n">render</span><span class="p">(</span>
+            <span class="n">bib_file</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">REPORT_FILES_DIR</span><span class="si">}</span><span class="s1">/citations.bib&#39;</span><span class="p">),</span>
+            <span class="n">image_folder</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">),</span>
+            <span class="n">name</span><span class="o">=</span><span class="n">system_name</span><span class="p">,</span>
+            <span class="n">tool_version</span><span class="o">=</span><span class="s1">&#39;1.0&#39;</span><span class="p">,</span>
+            <span class="n">report_date</span><span class="o">=</span><span class="n">date</span><span class="o">.</span><span class="n">today</span><span class="p">()</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">&quot;%b-</span><span class="si">%d</span><span class="s2">-%Y&quot;</span><span class="p">),</span>
+            <span class="n">explanations</span><span class="o">=</span><span class="n">explanations</span><span class="p">,</span>
+            <span class="n">figures_dict</span><span class="o">=</span><span class="n">figures_dict</span><span class="p">,</span>
+            <span class="n">files_dict</span><span class="o">=</span><span class="n">files_dict</span><span class="p">,</span>
+            <span class="n">inference_game_type</span><span class="o">=</span><span class="n">inference_game_type</span><span class="o">.</span><span class="n">value</span>
+        <span class="p">)</span>
+
+        <span class="c1"># Write the result (the string) to a .tex file</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">filename_no_extension</span><span class="si">}</span><span class="s1">.tex&#39;</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+            <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">latex_content</span><span class="p">)</span>
+
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;LaTex file created:</span><span class="se">\t</span><span class="si">{</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">filename_no_extension</span><span class="si">}</span><span class="s2">.tex&quot;</span><span class="p">)</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">call_pdflatex</span><span class="p">:</span>
+
+            <span class="c1"># Compile the .tex file to a .pdf file. Several rounds are required to get the references (to papers, to</span>
+            <span class="c1"># page numbers, and to figure numbers)</span>
+
+            <span class="n">process</span> <span class="o">=</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">Popen</span><span class="p">([</span><span class="s1">&#39;pdflatex&#39;</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">filename_no_extension</span><span class="si">}</span><span class="s1">.tex&#39;</span><span class="p">)],</span>
+                                       <span class="n">stdout</span><span class="o">=</span><span class="n">subprocess</span><span class="o">.</span><span class="n">PIPE</span><span class="p">,</span>
+                                       <span class="n">stderr</span><span class="o">=</span><span class="n">subprocess</span><span class="o">.</span><span class="n">PIPE</span><span class="p">)</span>
+            <span class="n">stdout</span><span class="p">,</span> <span class="n">stderr</span> <span class="o">=</span> <span class="n">process</span><span class="o">.</span><span class="n">communicate</span><span class="p">()</span>
+
+            <span class="n">process</span> <span class="o">=</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">Popen</span><span class="p">([</span><span class="s1">&#39;biber&#39;</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">filename_no_extension</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)],</span>
+                                       <span class="n">stdout</span><span class="o">=</span><span class="n">subprocess</span><span class="o">.</span><span class="n">PIPE</span><span class="p">,</span>
+                                       <span class="n">stderr</span><span class="o">=</span><span class="n">subprocess</span><span class="o">.</span><span class="n">PIPE</span><span class="p">)</span>
+            <span class="n">stdout</span><span class="p">,</span> <span class="n">stderr</span> <span class="o">=</span> <span class="n">process</span><span class="o">.</span><span class="n">communicate</span><span class="p">()</span>
+
+            <span class="n">process</span> <span class="o">=</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">Popen</span><span class="p">([</span><span class="s1">&#39;pdflatex&#39;</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">filename_no_extension</span><span class="si">}</span><span class="s1">.tex&#39;</span><span class="p">)],</span>
+                                       <span class="n">stdout</span><span class="o">=</span><span class="n">subprocess</span><span class="o">.</span><span class="n">PIPE</span><span class="p">,</span>
+                                       <span class="n">stderr</span><span class="o">=</span><span class="n">subprocess</span><span class="o">.</span><span class="n">PIPE</span><span class="p">)</span>
+            <span class="n">stdout</span><span class="p">,</span> <span class="n">stderr</span> <span class="o">=</span> <span class="n">process</span><span class="o">.</span><span class="n">communicate</span><span class="p">()</span>
+
+            <span class="n">process</span> <span class="o">=</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">Popen</span><span class="p">([</span><span class="s1">&#39;pdflatex&#39;</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">filename_no_extension</span><span class="si">}</span><span class="s1">.tex&#39;</span><span class="p">)],</span>
+                                       <span class="n">stdout</span><span class="o">=</span><span class="n">subprocess</span><span class="o">.</span><span class="n">PIPE</span><span class="p">,</span>
+                                       <span class="n">stderr</span><span class="o">=</span><span class="n">subprocess</span><span class="o">.</span><span class="n">PIPE</span><span class="p">)</span>
+            <span class="n">stdout</span><span class="p">,</span> <span class="n">stderr</span> <span class="o">=</span> <span class="n">process</span><span class="o">.</span><span class="n">communicate</span><span class="p">()</span>
+
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;PDF file created:</span><span class="se">\t</span><span class="si">{</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">filename_no_extension</span><span class="si">}</span><span class="s2">.pdf&quot;</span><span class="p">)</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span></div></div>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, Data Privacy and Trustworthy Machine Learning Research Lab.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

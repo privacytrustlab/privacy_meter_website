@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>privacy_meter.audit &mdash; Privacy Meter 1.0.0 documentation</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../index.html" class="icon icon-home"> Privacy Meter
+          </a>
+              <div class="version">
+                1.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../modules.html">privacy_meter</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Privacy Meter</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../index.html">Module code</a> &raquo;</li>
+      <li>privacy_meter.audit</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for privacy_meter.audit</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span><span class="p">,</span> <span class="n">Union</span>
+
+<span class="kn">from</span> <span class="nn">privacy_meter.constants</span> <span class="kn">import</span> <span class="n">MetricEnum</span><span class="p">,</span> <span class="n">InferenceGame</span>
+<span class="kn">from</span> <span class="nn">privacy_meter.hypothesis_test</span> <span class="kn">import</span> <span class="n">threshold_func</span>
+<span class="kn">from</span> <span class="nn">privacy_meter.information_source</span> <span class="kn">import</span> <span class="n">InformationSource</span>
+<span class="kn">from</span> <span class="nn">privacy_meter.information_source_signal</span> <span class="kn">import</span> <span class="n">ModelLoss</span>
+<span class="kn">from</span> <span class="nn">privacy_meter.metric</span> <span class="kn">import</span> <span class="n">Metric</span><span class="p">,</span> <span class="n">PopulationMetric</span><span class="p">,</span> <span class="n">ShadowMetric</span><span class="p">,</span> <span class="n">ReferenceMetric</span>
+<span class="kn">from</span> <span class="nn">privacy_meter.metric_result</span> <span class="kn">import</span> <span class="n">MetricResult</span>
+
+
+<div class="viewcode-block" id="Audit"><a class="viewcode-back" href="../../privacy_meter.html#privacy_meter.audit.Audit">[docs]</a><span class="k">class</span> <span class="nc">Audit</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    This class is here to orchestrate how the Metric objects and the InformationSource objects interact with one</span>
+<span class="sd">    another. The three steps of using this class are 1) initialization 2) audit.prepare() 3) audit.run()</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+            <span class="bp">self</span><span class="p">,</span>
+            <span class="n">metrics</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">MetricEnum</span><span class="p">,</span> <span class="n">Metric</span><span class="p">],</span> <span class="n">List</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">MetricEnum</span><span class="p">,</span> <span class="n">Metric</span><span class="p">]]],</span>
+            <span class="n">inference_game_type</span><span class="p">:</span> <span class="n">InferenceGame</span><span class="p">,</span>
+            <span class="n">target_info_sources</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">InformationSource</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="n">InformationSource</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+            <span class="n">reference_info_sources</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">InformationSource</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="n">InformationSource</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+            <span class="n">fpr_tolerances</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">float</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+            <span class="n">logs_directory_names</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Constructor</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            metrics: Metric object or list of Metric objects to be used for the audit</span>
+<span class="sd">            inference_game_type: The type of inference game being played: average privacy loss of a training algorithm,</span>
+<span class="sd">                privacy loss of a model, privacy loss of a data record, or worst-case privacy loss of a training</span>
+<span class="sd">                algorithm</span>
+<span class="sd">            target_info_sources: InformationSource object(s), containing the Model(s) that the metric will be performed</span>
+<span class="sd">                on, and the corresponding Dataset(s).</span>
+<span class="sd">            reference_info_sources: InformationSource object(s), containing the Model(s) that the metric will be fitted</span>
+<span class="sd">                on, and the corresponding Dataset(s).</span>
+<span class="sd">            fpr_tolerances: FPR tolerance value(s) to be respected by the audit</span>
+<span class="sd">            logs_directory_names: Path(s) to logging directory(ies)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">metrics</span> <span class="o">=</span> <span class="n">metrics</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">inference_game_type</span> <span class="o">=</span> <span class="n">inference_game_type</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">target_info_sources</span> <span class="o">=</span> <span class="n">target_info_sources</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">reference_info_sources</span> <span class="o">=</span> <span class="n">reference_info_sources</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fpr_tolerances</span> <span class="o">=</span> <span class="n">fpr_tolerances</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">logs_directory_names</span> <span class="o">=</span> <span class="n">logs_directory_names</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">__init_lists</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__init_logs_directories</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__init_metric_objects</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">__init_logs_directories</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Private function part of the initialization process, to specify default logging directory(ies), and create them</span>
+<span class="sd">        if necessary.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">logs_directory_names</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">logs_directory_names</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">metrics</span><span class="p">)):</span>
+                <span class="n">logs_dirname</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+                    <span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">(),</span>
+                    <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;log_%Y-%m-%d_%H-%M-%S-</span><span class="si">{</span><span class="n">i</span><span class="si">:</span><span class="s1">03d</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+                <span class="p">)</span>
+                <span class="n">os</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">logs_dirname</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">logs_directory_names</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">logs_dirname</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">path</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">logs_directory_names</span><span class="p">:</span>
+                <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isdir</span><span class="p">(</span><span class="n">path</span><span class="p">):</span>
+                    <span class="n">os</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">__init_metric_objects</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Private function part of the initialization process, to create Metric objects from MetricEnum ones.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">metric_objects</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">metric</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">metrics</span><span class="p">):</span>
+            <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">metric</span><span class="p">)</span> <span class="o">==</span> <span class="n">MetricEnum</span><span class="p">:</span>
+                <span class="c1"># Ff the user wants to use default versions of metrics</span>
+                <span class="k">if</span> <span class="n">metric</span> <span class="o">==</span> <span class="n">MetricEnum</span><span class="o">.</span><span class="n">POPULATION</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">metric_objects</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">PopulationMetric</span><span class="p">(</span>
+                        <span class="n">target_info_source</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">target_info_sources</span><span class="p">[</span><span class="n">k</span><span class="p">],</span>
+                        <span class="n">reference_info_source</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">reference_info_sources</span><span class="p">[</span><span class="n">k</span><span class="p">],</span>
+                        <span class="n">signals</span><span class="o">=</span><span class="p">[</span><span class="n">ModelLoss</span><span class="p">()],</span>
+                        <span class="n">hypothesis_test_func</span><span class="o">=</span><span class="n">threshold_func</span><span class="p">,</span>
+                        <span class="n">logs_dirname</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">logs_directory_names</span><span class="p">[</span><span class="n">k</span><span class="p">]</span>
+                    <span class="p">))</span>
+                <span class="k">elif</span> <span class="n">metric</span> <span class="o">==</span> <span class="n">MetricEnum</span><span class="o">.</span><span class="n">SHADOW</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">metric_objects</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ShadowMetric</span><span class="p">(</span>
+                        <span class="n">target_info_source</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">target_info_sources</span><span class="p">[</span><span class="n">k</span><span class="p">],</span>
+                        <span class="n">reference_info_source</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">reference_info_sources</span><span class="p">[</span><span class="n">k</span><span class="p">],</span>
+                        <span class="n">signals</span><span class="o">=</span><span class="p">[</span><span class="n">ModelLoss</span><span class="p">()],</span>
+                        <span class="n">hypothesis_test_func</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                        <span class="n">logs_dirname</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">logs_directory_names</span><span class="p">[</span><span class="n">k</span><span class="p">]</span>
+                    <span class="p">))</span>
+                <span class="k">elif</span> <span class="n">metric</span> <span class="o">==</span> <span class="n">MetricEnum</span><span class="o">.</span><span class="n">REFERENCE</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">metric_objects</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ReferenceMetric</span><span class="p">(</span>
+                        <span class="n">target_info_source</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">target_info_sources</span><span class="p">[</span><span class="n">k</span><span class="p">],</span>
+                        <span class="n">reference_info_source</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">reference_info_sources</span><span class="p">[</span><span class="n">k</span><span class="p">],</span>
+                        <span class="n">signals</span><span class="o">=</span><span class="p">[</span><span class="n">ModelLoss</span><span class="p">()],</span>
+                        <span class="n">hypothesis_test_func</span><span class="o">=</span><span class="n">threshold_func</span><span class="p">,</span>
+                        <span class="n">logs_dirname</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">logs_directory_names</span><span class="p">[</span><span class="n">k</span><span class="p">]</span>
+                    <span class="p">))</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="c1"># If the user wants to pass in their custom metric object</span>
+                <span class="n">metric</span><span class="o">.</span><span class="n">logs_dirname</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">logs_directory_names</span><span class="p">[</span><span class="n">k</span><span class="p">]</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">metric_objects</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">metric</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">__init_lists</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Private function part of the initialization process, to have consistent argument types.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">metrics</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">metrics</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">metrics</span><span class="p">]</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">target_info_sources</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">target_info_sources</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">target_info_sources</span><span class="p">]</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">reference_info_sources</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">reference_info_sources</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">reference_info_sources</span><span class="p">]</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">fpr_tolerances</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">fpr_tolerances</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">fpr_tolerances</span><span class="p">]</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">logs_directory_names</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">logs_directory_names</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">logs_directory_names</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">logs_directory_names</span><span class="p">]</span>
+
+<div class="viewcode-block" id="Audit.prepare"><a class="viewcode-back" href="../../privacy_meter.html#privacy_meter.audit.Audit.prepare">[docs]</a>    <span class="k">def</span> <span class="nf">prepare</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Core function that should be called after the initialization and before the audit.run() function. Runs the</span>
+<span class="sd">        prepare_metric function of all metric objects, which computes (or load from memory) the signals required for the</span>
+<span class="sd">        inference algorithms.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">metric_objects</span><span class="p">)):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">metric_objects</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">prepare_metric</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="Audit.run"><a class="viewcode-back" href="../../privacy_meter.html#privacy_meter.audit.Audit.run">[docs]</a>    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">MetricResult</span><span class="p">]:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Core function that should be called after the audit.prepare() function. This actually runs the metrics&#39;</span>
+<span class="sd">        inference algorithms.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            A list of MetricResult objects (one per metric)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Results are stored in: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">logs_directory_names</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">metric_objects</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">run_metric</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">fpr_tolerances</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">metric_objects</span><span class="p">))]</span></div></div>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, Data Privacy and Trustworthy Machine Learning Research Lab.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

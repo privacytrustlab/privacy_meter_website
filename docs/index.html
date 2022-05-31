@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Welcome to Privacy Meter’s documentation! &mdash; Privacy Meter 1.0.0 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="privacy_meter" href="modules.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="#" class="icon icon-home"> Privacy Meter
+          </a>
+              <div class="version">
+                1.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="modules.html">privacy_meter</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="#">Privacy Meter</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="#" class="icon icon-home"></a> &raquo;</li>
+      <li>Welcome to Privacy Meter’s documentation!</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/index.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="welcome-to-privacy-meter-s-documentation">
+<h1>Welcome to Privacy Meter’s documentation!<a class="headerlink" href="#welcome-to-privacy-meter-s-documentation" title="Permalink to this headline"></a></h1>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>This library and the associated documentation are working drafts. A stable version will be released to <code class="docutils literal notranslate"><span class="pre">PyPi</span></code> shortly.</p>
+</div>
+<section id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Permalink to this headline"></a></h2>
+<p>This tool is designed to be used by a wide variety of users, from trustworthy ML researchers to non-technical users.</p>
+<p>Trustworthy ML researchers can use the wrapper from the library to implement their own audits.</p>
+<p>Non-technical users can use built-in audit functions to test their ML workflow vulnerability.</p>
+<section id="installation">
+<h3>Installation<a class="headerlink" href="#installation" title="Permalink to this headline"></a></h3>
+<p>Privacy Meter supports Python <code class="docutils literal notranslate"><span class="pre">&gt;=3.6</span></code> and works with <code class="docutils literal notranslate"><span class="pre">tensorflow&gt;=2.4.0</span></code> and <code class="docutils literal notranslate"><span class="pre">torch&gt;=1.10.0</span></code>.</p>
+<p>You can clone this repository and install the local version of tool with its dependencies by running the following:</p>
+<div class="highlight-shell-session notranslate"><div class="highlight"><pre><span></span><span class="go">pip install -r requirements.txt</span>
+<span class="go">pip install -e .</span>
+</pre></div>
+</div>
+<p>We will be publishing the tool to <code class="docutils literal notranslate"><span class="pre">PyPi</span></code> shortly so you can install the tool directly using <code class="docutils literal notranslate"><span class="pre">pip</span></code>.</p>
+<figure class="align-center" id="id1">
+<a class="reference internal image-reference" href="_images/population_metric_signal_histogram.jpg"><img alt="_images/population_metric_signal_histogram.jpg" src="_images/population_metric_signal_histogram.jpg" style="height: 300px;" /></a>
+<figcaption>
+<p><span class="caption-text">Figure 1: Loss histogram on a population metric audit</span><a class="headerlink" href="#id1" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<figure class="align-center" id="id2">
+<a class="reference internal image-reference" href="_images/population_metric_roc_curve.jpg"><img alt="_images/population_metric_roc_curve.jpg" src="_images/population_metric_roc_curve.jpg" style="height: 300px;" /></a>
+<figcaption>
+<p><span class="caption-text">Figure 2: ROC curve on a population metric audit</span><a class="headerlink" href="#id2" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+</section>
+<section id="usage">
+<h3>Usage<a class="headerlink" href="#usage" title="Permalink to this headline"></a></h3>
+<p>Examples of using the tool can be found in the <code class="docutils literal notranslate"><span class="pre">docs/</span></code> directory. The tutorials are provided as Jupyter notebooks.</p>
+</section>
+<section id="references">
+<h3>References<a class="headerlink" href="#references" title="Permalink to this headline"></a></h3>
+<ol class="arabic simple">
+<li><p>Jiayuan Ye, Aadyaa Maddi, Sasi Kumar Murakonda, Reza Shokri. <a class="reference external" href="https://arxiv.org/pdf/2111.09679.pdf">Enhanced Membership Inference Attacks against Machine Learning Models</a> arXiv preprint arXiv:2111.09679</p></li>
+<li><p>Milad Nasr, Reza Shokri, and Amir Houmansadr. <a class="reference external" href="https://www.comp.nus.edu.sg/~reza/files/Shokri-SP2019.pdf">Comprehensive Privacy Analysis of Deep Learning: Stand-alone and Federated Learning under Passive and Active White-box Inference Attacks</a> in IEEE Symposiumon Security and Privacy, 2019.</p></li>
+<li><p>Reza Shokri, Marco Stronati, Congzheng Song, and Vitaly Shmatikov. <a class="reference external" href="https://www.comp.nus.edu.sg/~reza/files/Shokri-SP2017.pdf">Membership Inference Attacks against Machine Learning Models</a> in IEEE Symposium on Security and Privacy, 2017.</p></li>
+</ol>
+</section>
+<section id="contributors">
+<h3>Contributors<a class="headerlink" href="#contributors" title="Permalink to this headline"></a></h3>
+<p>The tool is designed and developed at NUS Data Privacy and Trustworthy Machine Learning Lab.</p>
+<p>Current contributers are: Aadyaa Maddi, Jiayuan Ye, Sasi Kumar Murakonda, Victor Masiak, and Reza Shokri.</p>
+<p>Earlier contributors were Milad Nasr, Shadab Shaikh, and Mihir Harshavardhan Khandekar.</p>
+<a class="reference internal image-reference" href="https://www.comp.nus.edu.sg/~reza/img/aadyaa.jpg"><img alt="Aadyaa Maddi" src="https://www.comp.nus.edu.sg/~reza/img/aadyaa.jpg" style="width: 100px;" /></a>
+<a class="reference internal image-reference" href="https://www.comp.nus.edu.sg/~reza/img/jiayuan.jpg"><img alt="Jiayuan Ye" src="https://www.comp.nus.edu.sg/~reza/img/jiayuan.jpg" style="width: 100px;" /></a>
+<a class="reference internal image-reference" href="https://www.comp.nus.edu.sg/~reza/img/sasi.jpg"><img alt="Sasi Kumar Murakonda" src="https://www.comp.nus.edu.sg/~reza/img/sasi.jpg" style="width: 100px;" /></a>
+<a class="reference internal image-reference" href="https://www.comp.nus.edu.sg/~reza/img/victor.jpg"><img alt="Victor Masiak" src="https://www.comp.nus.edu.sg/~reza/img/victor.jpg" style="width: 100px;" /></a>
+<a class="reference internal image-reference" href="https://www.comp.nus.edu.sg/~reza/img/reza.jpg"><img alt="Reza Shokri" src="https://www.comp.nus.edu.sg/~reza/img/reza.jpg" style="width: 100px;" /></a>
+</section>
+</section>
+<section id="indices-and-tables">
+<h2>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Permalink to this headline"></a></h2>
+<ul class="simple">
+<li><p><a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a></p></li>
+<li><p><a class="reference internal" href="py-modindex.html"><span class="std std-ref">Module Index</span></a></p></li>
+<li><p><a class="reference internal" href="search.html"><span class="std std-ref">Search Page</span></a></p></li>
+</ul>
+<div class="toctree-wrapper compound">
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="modules.html">privacy_meter</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="privacy_meter.html">privacy_meter package</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="modules.html" class="btn btn-neutral float-right" title="privacy_meter" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, Data Privacy and Trustworthy Machine Learning Research Lab.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

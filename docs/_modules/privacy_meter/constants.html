@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>privacy_meter.constants &mdash; Privacy Meter 1.0.0 documentation</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../index.html" class="icon icon-home"> Privacy Meter
+          </a>
+              <div class="version">
+                1.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../modules.html">privacy_meter</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Privacy Meter</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../index.html">Module code</a> &raquo;</li>
+      <li>privacy_meter.constants</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for privacy_meter.constants</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">enum</span> <span class="kn">import</span> <span class="n">Enum</span>
+
+
+<div class="viewcode-block" id="MetricEnum"><a class="viewcode-back" href="../../privacy_meter.html#privacy_meter.constants.MetricEnum">[docs]</a><span class="k">class</span> <span class="nc">MetricEnum</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+    <span class="n">POPULATION</span> <span class="o">=</span> <span class="s2">&quot;population_metric&quot;</span>
+    <span class="n">SHADOW</span> <span class="o">=</span> <span class="s2">&quot;shadow_metric&quot;</span>
+    <span class="n">REFERENCE</span> <span class="o">=</span> <span class="s2">&quot;reference_metric&quot;</span></div>
+
+
+<div class="viewcode-block" id="SignalSourceEnum"><a class="viewcode-back" href="../../privacy_meter.html#privacy_meter.constants.SignalSourceEnum">[docs]</a><span class="k">class</span> <span class="nc">SignalSourceEnum</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+    <span class="n">TARGET_MEMBER</span> <span class="o">=</span> <span class="s2">&quot;target_member&quot;</span>
+    <span class="n">TARGET_NON_MEMBER</span> <span class="o">=</span> <span class="s2">&quot;target_non_member&quot;</span>
+    <span class="n">REFERENCE</span> <span class="o">=</span> <span class="s2">&quot;reference&quot;</span>
+    <span class="n">REFERENCE_MEMBER</span> <span class="o">=</span> <span class="s2">&quot;reference_member&quot;</span>
+    <span class="n">REFERENCE_NON_MEMBER</span> <span class="o">=</span> <span class="s2">&quot;reference_non_member&quot;</span></div>
+
+
+<div class="viewcode-block" id="InferenceGame"><a class="viewcode-back" href="../../privacy_meter.html#privacy_meter.constants.InferenceGame">[docs]</a><span class="k">class</span> <span class="nc">InferenceGame</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+    <span class="n">AVG_PRIVACY_LOSS_TRAINING_ALGO</span> <span class="o">=</span> <span class="s2">&quot;Average privacy loss of a training algorithm&quot;</span>
+    <span class="n">PRIVACY_LOSS_MODEL</span> <span class="o">=</span> <span class="s2">&quot;Privacy loss of a model&quot;</span>
+    <span class="n">PRIVACY_LOSS_SAMPLE</span> <span class="o">=</span> <span class="s2">&quot;Privacy loss of a data record&quot;</span>
+    <span class="n">WORST_CASE_PRIVACY_LOSS_TRAINING_ALGO</span> <span class="o">=</span> <span class="s2">&quot;Worst-case privacy loss of a training algorithm&quot;</span></div>
+
+
+<span class="n">TARGET_MEMBER_SIGNALS_FILENAME</span> <span class="o">=</span> <span class="s1">&#39;target_member_signals&#39;</span>
+<span class="n">TARGET_NON_MEMBER_SIGNALS_FILENAME</span> <span class="o">=</span> <span class="s1">&#39;target_non_member_signals&#39;</span>
+
+<span class="n">REFERENCE_MEMBER_SIGNALS_FILENAME</span> <span class="o">=</span> <span class="s1">&#39;reference_member_signals&#39;</span>
+<span class="n">REFERENCE_NON_MEMBER_SIGNALS_FILENAME</span> <span class="o">=</span> <span class="s1">&#39;reference_non_member_signals&#39;</span>
+<span class="n">REFERENCE_SIGNALS_FILENAME</span> <span class="o">=</span> <span class="s1">&#39;reference_signals&#39;</span>
+
+<span class="n">NPZ_EXTENSION</span> <span class="o">=</span> <span class="s1">&#39;.npz&#39;</span>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, Data Privacy and Trustworthy Machine Learning Research Lab.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,1119 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>privacy_meter package &mdash; Privacy Meter 1.0.0 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="privacy_meter.tests package" href="privacy_meter.tests.html" />
+    <link rel="prev" title="privacy_meter" href="modules.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index.html" class="icon icon-home"> Privacy Meter
+          </a>
+              <div class="version">
+                1.0
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">privacy_meter</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">privacy_meter package</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#subpackages">Subpackages</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="privacy_meter.tests.html">privacy_meter.tests package</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#submodules">Submodules</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-privacy_meter.audit">privacy_meter.audit module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-privacy_meter.audit_report">privacy_meter.audit_report module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-privacy_meter.constants">privacy_meter.constants module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-privacy_meter.dataset">privacy_meter.dataset module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-privacy_meter.hypothesis_test">privacy_meter.hypothesis_test module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-privacy_meter.information_source">privacy_meter.information_source module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-privacy_meter.information_source_signal">privacy_meter.information_source_signal module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-privacy_meter.metric">privacy_meter.metric module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-privacy_meter.metric_result">privacy_meter.metric_result module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-privacy_meter.model">privacy_meter.model module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-privacy_meter.utils">privacy_meter.utils module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-privacy_meter">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Privacy Meter</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="modules.html">privacy_meter</a> &raquo;</li>
+      <li>privacy_meter package</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/privacy_meter.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="privacy-meter-package">
+<h1>privacy_meter package<a class="headerlink" href="#privacy-meter-package" title="Permalink to this headline"></a></h1>
+<section id="subpackages">
+<h2>Subpackages<a class="headerlink" href="#subpackages" title="Permalink to this headline"></a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="privacy_meter.tests.html">privacy_meter.tests package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="privacy_meter.tests.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="privacy_meter.tests.html#module-privacy_meter.tests.test_model">privacy_meter.tests.test_model module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="privacy_meter.tests.html#module-privacy_meter.tests">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline"></a></h2>
+</section>
+<section id="module-privacy_meter.audit">
+<span id="privacy-meter-audit-module"></span><h2>privacy_meter.audit module<a class="headerlink" href="#module-privacy_meter.audit" title="Permalink to this headline"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="privacy_meter.audit.Audit">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">privacy_meter.audit.</span></span><span class="sig-name descname"><span class="pre">Audit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">metrics</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#privacy_meter.constants.MetricEnum" title="privacy_meter.constants.MetricEnum"><span class="pre">privacy_meter.constants.MetricEnum</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="#privacy_meter.metric.Metric" title="privacy_meter.metric.Metric"><span class="pre">privacy_meter.metric.Metric</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#privacy_meter.constants.MetricEnum" title="privacy_meter.constants.MetricEnum"><span class="pre">privacy_meter.constants.MetricEnum</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="#privacy_meter.metric.Metric" title="privacy_meter.metric.Metric"><span class="pre">privacy_meter.metric.Metric</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inference_game_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#privacy_meter.constants.InferenceGame" title="privacy_meter.constants.InferenceGame"><span class="pre">privacy_meter.constants.InferenceGame</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">target_info_sources</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#privacy_meter.information_source.InformationSource" title="privacy_meter.information_source.InformationSource"><span class="pre">privacy_meter.information_source.InformationSource</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#privacy_meter.information_source.InformationSource" title="privacy_meter.information_source.InformationSource"><span class="pre">privacy_meter.information_source.InformationSource</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reference_info_sources</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#privacy_meter.information_source.InformationSource" title="privacy_meter.information_source.InformationSource"><span class="pre">privacy_meter.information_source.InformationSource</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#privacy_meter.information_source.InformationSource" title="privacy_meter.information_source.InformationSource"><span class="pre">privacy_meter.information_source.InformationSource</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fpr_tolerances</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">logs_directory_names</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/privacy_meter/audit.html#Audit"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#privacy_meter.audit.Audit" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>This class is here to orchestrate how the Metric objects and the InformationSource objects interact with one
+another. The three steps of using this class are 1) initialization 2) audit.prepare() 3) audit.run()</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="privacy_meter.audit.Audit.prepare">
+<span class="sig-name descname"><span class="pre">prepare</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/privacy_meter/audit.html#Audit.prepare"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#privacy_meter.audit.Audit.prepare" title="Permalink to this definition"></a></dt>
+<dd><p>Core function that should be called after the initialization and before the audit.run() function. Runs the
+prepare_metric function of all metric objects, which computes (or load from memory) the signals required for the
+inference algorithms.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="privacy_meter.audit.Audit.run">
+<span class="sig-name descname"><span class="pre">run</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#privacy_meter.metric_result.MetricResult" title="privacy_meter.metric_result.MetricResult"><span class="pre">privacy_meter.metric_result.MetricResult</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/privacy_meter/audit.html#Audit.run"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#privacy_meter.audit.Audit.run" title="Permalink to this definition"></a></dt>
+<dd><p>Core function that should be called after the audit.prepare() function. This actually runs the metrics’
+inference algorithms.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>A list of MetricResult objects (one per metric)</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-privacy_meter.audit_report">
+<span id="privacy-meter-audit-report-module"></span><h2>privacy_meter.audit_report module<a class="headerlink" href="#module-privacy_meter.audit_report" title="Permalink to this headline"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="privacy_meter.audit_report.AuditReport">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">privacy_meter.audit_report.</span></span><span class="sig-name descname"><span class="pre">AuditReport</span></span><a class="reference internal" href="_modules/privacy_meter/audit_report.html#AuditReport"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#privacy_meter.audit_report.AuditReport" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">abc.ABC</span></code></p>
+<p>An abstract class to display and/or save some elements of a metric result object.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="privacy_meter.audit_report.AuditReport.generate_report">
+<em class="property"><span class="pre">abstract</span><span class="w"> </span><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">generate_report</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">metric_result</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#privacy_meter.metric_result.MetricResult" title="privacy_meter.metric_result.MetricResult"><span class="pre">privacy_meter.metric_result.MetricResult</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#privacy_meter.metric_result.MetricResult" title="privacy_meter.metric_result.MetricResult"><span class="pre">privacy_meter.metric_result.MetricResult</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">dict</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inference_game_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#privacy_meter.constants.InferenceGame" title="privacy_meter.constants.InferenceGame"><span class="pre">privacy_meter.constants.InferenceGame</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/privacy_meter/audit_report.html#AuditReport.generate_report"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#privacy_meter.audit_report.AuditReport.generate_report" title="Permalink to this definition"></a></dt>
+<dd><p>Core function of the AuditReport class, that actually generates the report.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>metric_result</strong> – MetricResult object, containing data for the report.</p></li>
+<li><p><strong>inference_game_type</strong> – Value from the InferenceGame ENUM type, indicating which inference game was used.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="privacy_meter.audit_report.ConfusionMatrixReport">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">privacy_meter.audit_report.</span></span><span class="sig-name descname"><span class="pre">ConfusionMatrixReport</span></span><a class="reference internal" href="_modules/privacy_meter/audit_report.html#ConfusionMatrixReport"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#privacy_meter.audit_report.ConfusionMatrixReport" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#privacy_meter.audit_report.AuditReport" title="privacy_meter.audit_report.AuditReport"><code class="xref py py-class docutils literal notranslate"><span class="pre">privacy_meter.audit_report.AuditReport</span></code></a></p>
+<p>Inherits of the AuditReport class, an interface class to display and/or save some elements of a metric result
+object. This particular class is used to generate a confusion matrix.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="privacy_meter.audit_report.ConfusionMatrixReport.generate_report">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">generate_report</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">metric_result</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#privacy_meter.metric_result.MetricResult" title="privacy_meter.metric_result.MetricResult"><span class="pre">privacy_meter.metric_result.MetricResult</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#privacy_meter.metric_result.MetricResult" title="privacy_meter.metric_result.MetricResult"><span class="pre">privacy_meter.metric_result.MetricResult</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inference_game_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#privacy_meter.constants.InferenceGame" title="privacy_meter.constants.InferenceGame"><span class="pre">privacy_meter.constants.InferenceGame</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">show</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">save</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filename</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'confusion_matrix.jpg'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/privacy_meter/audit_report.html#ConfusionMatrixReport.generate_report"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#privacy_meter.audit_report.ConfusionMatrixReport.generate_report" title="Permalink to this definition"></a></dt>
+<dd><p>Core function of the AuditReport class, that actually generates the report.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>metric_result</strong> – MetricResult object, containing data for the report.</p></li>
+<li><p><strong>inference_game_type</strong> – Value from the InferenceGame ENUM type, indicating which inference game was used.</p></li>
+<li><p><strong>show</strong> – Boolean specifying if the plot should be displayed on screen.</p></li>
+<li><p><strong>save</strong> – Boolean specifying if the plot should be saved as a file.</p></li>
+<li><p><strong>filename</strong> – File name to be used if the plot is saved as a file.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="privacy_meter.audit_report.PDFReport">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">privacy_meter.audit_report.</span></span><span class="sig-name descname"><span class="pre">PDFReport</span></span><a class="reference internal" href="_modules/privacy_meter/audit_report.html#PDFReport"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#privacy_meter.audit_report.PDFReport" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#privacy_meter.audit_report.AuditReport" title="privacy_meter.audit_report.AuditReport"><code class="xref py py-class docutils literal notranslate"><span class="pre">privacy_meter.audit_report.AuditReport</span></code></a></p>
+<p>Inherits of the AuditReport class, an interface class to display and/or save some elements of a metric result
+object. This particular class is used to generate a user-friendly report, with multiple plots and some explanations.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="privacy_meter.audit_report.PDFReport.generate_report">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">generate_report</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">metric_results</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#privacy_meter.metric_result.MetricResult" title="privacy_meter.metric_result.MetricResult"><span class="pre">privacy_meter.metric_result.MetricResult</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#privacy_meter.metric_result.MetricResult" title="privacy_meter.metric_result.MetricResult"><span class="pre">privacy_meter.metric_result.MetricResult</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#privacy_meter.metric_result.MetricResult" title="privacy_meter.metric_result.MetricResult"><span class="pre">privacy_meter.metric_result.MetricResult</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inference_game_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#privacy_meter.constants.InferenceGame" title="privacy_meter.constants.InferenceGame"><span class="pre">privacy_meter.constants.InferenceGame</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">figures_dict</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">system_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">call_pdflatex</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">show</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">save</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filename_no_extension</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'report'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">target_info_source</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#privacy_meter.information_source.InformationSource" title="privacy_meter.information_source.InformationSource"><span class="pre">privacy_meter.information_source.InformationSource</span></a><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">target_model_to_train_split_mapping</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">point_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'any'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/privacy_meter/audit_report.html#PDFReport.generate_report"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#privacy_meter.audit_report.PDFReport.generate_report" title="Permalink to this definition"></a></dt>
+<dd><p>Core function of the AuditReport class, that actually generates the report.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>metric_results</strong> – A dict of lists of MetricResult objects, containing data for the report.</p></li>
+<li><p><strong>inference_game_type</strong> – Value from the InferenceGame ENUM type, indicating which inference game was used.</p></li>
+<li><p><strong>figures_dict</strong> – A dictionary containing the figures to include, for each metric result.
+E.g. {“shadow_metric”: [“roc_curve”, “confusion_matrix”, “signal_histogram”]}</p></li>
+<li><p><strong>system_name</strong> – Name of the system being audited. E.g. “Purchase100 classifier”</p></li>
+<li><p><strong>call_pdflatex</strong> – Boolean to specify if the pdflatex compiler should be called (to get a PDF file from the
+TEX file)</p></li>
+<li><p><strong>show</strong> – Boolean specifying if the plot should be displayed on screen.</p></li>
+<li><p><strong>save</strong> – Boolean specifying if the plot should be saved as a file.</p></li>
+<li><p><strong>filename_no_extension</strong> – File name to be used if the plot is saved as a file, without the file extension.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="privacy_meter.audit_report.ROCCurveReport">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">privacy_meter.audit_report.</span></span><span class="sig-name descname"><span class="pre">ROCCurveReport</span></span><a class="reference internal" href="_modules/privacy_meter/audit_report.html#ROCCurveReport"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#privacy_meter.audit_report.ROCCurveReport" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#privacy_meter.audit_report.AuditReport" title="privacy_meter.audit_report.AuditReport"><code class="xref py py-class docutils literal notranslate"><span class="pre">privacy_meter.audit_report.AuditReport</span></code></a></p>
+<p>Inherits of the AuditReport class, an interface class to display and/or save some elements of a metric result
+object. This particular class is used to generate a ROC (Receiver Operating Characteristic) curve.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="privacy_meter.audit_report.ROCCurveReport.generate_report">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">generate_report</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">metric_result</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#privacy_meter.metric_result.MetricResult" title="privacy_meter.metric_result.MetricResult"><span class="pre">privacy_meter.metric_result.MetricResult</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#privacy_meter.metric_result.MetricResult" title="privacy_meter.metric_result.MetricResult"><span class="pre">privacy_meter.metric_result.MetricResult</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#privacy_meter.metric_result.MetricResult" title="privacy_meter.metric_result.MetricResult"><span class="pre">privacy_meter.metric_result.MetricResult</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inference_game_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#privacy_meter.constants.InferenceGame" title="privacy_meter.constants.InferenceGame"><span class="pre">privacy_meter.constants.InferenceGame</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">show</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">save</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filename</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'roc_curve.jpg'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/privacy_meter/audit_report.html#ROCCurveReport.generate_report"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#privacy_meter.audit_report.ROCCurveReport.generate_report" title="Permalink to this definition"></a></dt>
+<dd><p>Core function of the AuditReport class, that actually generates the report.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>metric_result</strong> – A list of MetricResult objects, containing data for the report.</p></li>
+<li><p><strong>inference_game_type</strong> – Value from the InferenceGame ENUM type, indicating which inference game was used.</p></li>
+<li><p><strong>show</strong> – Boolean specifying if the plot should be displayed on screen.</p></li>
+<li><p><strong>save</strong> – Boolean specifying if the plot should be saved as a file.</p></li>
+<li><p><strong>filename</strong> – File name to be used if the plot is saved as a file.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="privacy_meter.audit_report.SignalHistogramReport">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">privacy_meter.audit_report.</span></span><span class="sig-name descname"><span class="pre">SignalHistogramReport</span></span><a class="reference internal" href="_modules/privacy_meter/audit_report.html#SignalHistogramReport"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#privacy_meter.audit_report.SignalHistogramReport" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#privacy_meter.audit_report.AuditReport" title="privacy_meter.audit_report.AuditReport"><code class="xref py py-class docutils literal notranslate"><span class="pre">privacy_meter.audit_report.AuditReport</span></code></a></p>
+<p>Inherits of the AuditReport class, an interface class to display and/or save some elements of a metric result
+object. This particular class is used to generate a histogram of the signal values.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="privacy_meter.audit_report.SignalHistogramReport.generate_report">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">generate_report</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">metric_result</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#privacy_meter.metric_result.MetricResult" title="privacy_meter.metric_result.MetricResult"><span class="pre">privacy_meter.metric_result.MetricResult</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#privacy_meter.metric_result.MetricResult" title="privacy_meter.metric_result.MetricResult"><span class="pre">privacy_meter.metric_result.MetricResult</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inference_game_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#privacy_meter.constants.InferenceGame" title="privacy_meter.constants.InferenceGame"><span class="pre">privacy_meter.constants.InferenceGame</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">show</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">save</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filename</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'signal_histogram.jpg'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/privacy_meter/audit_report.html#SignalHistogramReport.generate_report"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#privacy_meter.audit_report.SignalHistogramReport.generate_report" title="Permalink to this definition"></a></dt>
+<dd><p>Core function of the AuditReport class, that actually generates the report.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>metric_result</strong> – MetricResult object, containing data for the report.</p></li>
+<li><p><strong>inference_game_type</strong> – Value from the InferenceGame ENUM type, indicating which inference game was used.</p></li>
+<li><p><strong>show</strong> – Boolean specifying if the plot should be displayed on screen.</p></li>
+<li><p><strong>save</strong> – Boolean specifying if the plot should be saved as a file.</p></li>
+<li><p><strong>filename</strong> – File name to be used if the plot is saved as a file.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="privacy_meter.audit_report.VulnerablePointsReport">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">privacy_meter.audit_report.</span></span><span class="sig-name descname"><span class="pre">VulnerablePointsReport</span></span><a class="reference internal" href="_modules/privacy_meter/audit_report.html#VulnerablePointsReport"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#privacy_meter.audit_report.VulnerablePointsReport" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#privacy_meter.audit_report.AuditReport" title="privacy_meter.audit_report.AuditReport"><code class="xref py py-class docutils literal notranslate"><span class="pre">privacy_meter.audit_report.AuditReport</span></code></a></p>
+<p>Inherits of the AuditReport class, an interface class to display and/or save some elements of a metric result
+object. This particular class is used to identify the most vulnerable points.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="privacy_meter.audit_report.VulnerablePointsReport.generate_report">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">generate_report</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">metric_results</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#privacy_meter.metric_result.MetricResult" title="privacy_meter.metric_result.MetricResult"><span class="pre">privacy_meter.metric_result.MetricResult</span></a><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inference_game_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#privacy_meter.constants.InferenceGame" title="privacy_meter.constants.InferenceGame"><span class="pre">privacy_meter.constants.InferenceGame</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">target_info_source</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#privacy_meter.information_source.InformationSource" title="privacy_meter.information_source.InformationSource"><span class="pre">privacy_meter.information_source.InformationSource</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">target_model_to_train_split_mapping</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">number_of_points</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">save_tex</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filename</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'vulnerable_points.tex'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">return_raw_values</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">point_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'any'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/privacy_meter/audit_report.html#VulnerablePointsReport.generate_report"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#privacy_meter.audit_report.VulnerablePointsReport.generate_report" title="Permalink to this definition"></a></dt>
+<dd><p>Core function of the AuditReport class, that actually generates the report.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>metric_results</strong> – A dict of lists of MetricResult objects, containing data for the report.</p></li>
+<li><p><strong>target_info_source</strong> – The InformationSource associated with the audited model training</p></li>
+<li><p><strong>target_model_to_train_split_mapping</strong> – The mapping associated with target_info_source</p></li>
+<li><p><strong>number_of_points</strong> – Number of vulnerable to be selected</p></li>
+<li><p><strong>save_tex</strong> – Boolean specifying if a partial .tex file should be generated</p></li>
+<li><p><strong>filename</strong> – Filename of the partial .tex file</p></li>
+<li><p><strong>return_raw_values</strong> – Boolean specifying if the points indices and scores should be returned</p></li>
+<li><p><strong>point_type</strong> – Can be “any” or “image”. If “image”, then the images are displayed as such in the report.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Indices of the vulnerable points and their scores</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-privacy_meter.constants">
+<span id="privacy-meter-constants-module"></span><h2>privacy_meter.constants module<a class="headerlink" href="#module-privacy_meter.constants" title="Permalink to this headline"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="privacy_meter.constants.InferenceGame">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">privacy_meter.constants.</span></span><span class="sig-name descname"><span class="pre">InferenceGame</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/privacy_meter/constants.html#InferenceGame"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#privacy_meter.constants.InferenceGame" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">enum.Enum</span></code></p>
+<p>An enumeration.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="privacy_meter.constants.InferenceGame.AVG_PRIVACY_LOSS_TRAINING_ALGO">
+<span class="sig-name descname"><span class="pre">AVG_PRIVACY_LOSS_TRAINING_ALGO</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'Average</span> <span class="pre">privacy</span> <span class="pre">loss</span> <span class="pre">of</span> <span class="pre">a</span> <span class="pre">training</span> <span class="pre">algorithm'</span></em><a class="headerlink" href="#privacy_meter.constants.InferenceGame.AVG_PRIVACY_LOSS_TRAINING_ALGO" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="privacy_meter.constants.InferenceGame.PRIVACY_LOSS_MODEL">
+<span class="sig-name descname"><span class="pre">PRIVACY_LOSS_MODEL</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'Privacy</span> <span class="pre">loss</span> <span class="pre">of</span> <span class="pre">a</span> <span class="pre">model'</span></em><a class="headerlink" href="#privacy_meter.constants.InferenceGame.PRIVACY_LOSS_MODEL" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="privacy_meter.constants.InferenceGame.PRIVACY_LOSS_SAMPLE">
+<span class="sig-name descname"><span class="pre">PRIVACY_LOSS_SAMPLE</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'Privacy</span> <span class="pre">loss</span> <span class="pre">of</span> <span class="pre">a</span> <span class="pre">data</span> <span class="pre">record'</span></em><a class="headerlink" href="#privacy_meter.constants.InferenceGame.PRIVACY_LOSS_SAMPLE" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="privacy_meter.constants.InferenceGame.WORST_CASE_PRIVACY_LOSS_TRAINING_ALGO">
+<span class="sig-name descname"><span class="pre">WORST_CASE_PRIVACY_LOSS_TRAINING_ALGO</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'Worst-case</span> <span class="pre">privacy</span> <span class="pre">loss</span> <span class="pre">of</span> <span class="pre">a</span> <span class="pre">training</span> <span class="pre">algorithm'</span></em><a class="headerlink" href="#privacy_meter.constants.InferenceGame.WORST_CASE_PRIVACY_LOSS_TRAINING_ALGO" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="privacy_meter.constants.MetricEnum">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">privacy_meter.constants.</span></span><span class="sig-name descname"><span class="pre">MetricEnum</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/privacy_meter/constants.html#MetricEnum"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#privacy_meter.constants.MetricEnum" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">enum.Enum</span></code></p>
+<p>An enumeration.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="privacy_meter.constants.MetricEnum.POPULATION">
+<span class="sig-name descname"><span class="pre">POPULATION</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'population_metric'</span></em><a class="headerlink" href="#privacy_meter.constants.MetricEnum.POPULATION" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="privacy_meter.constants.MetricEnum.REFERENCE">
+<span class="sig-name descname"><span class="pre">REFERENCE</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'reference_metric'</span></em><a class="headerlink" href="#privacy_meter.constants.MetricEnum.REFERENCE" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="privacy_meter.constants.MetricEnum.SHADOW">
+<span class="sig-name descname"><span class="pre">SHADOW</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'shadow_metric'</span></em><a class="headerlink" href="#privacy_meter.constants.MetricEnum.SHADOW" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="privacy_meter.constants.SignalSourceEnum">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">privacy_meter.constants.</span></span><span class="sig-name descname"><span class="pre">SignalSourceEnum</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/privacy_meter/constants.html#SignalSourceEnum"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#privacy_meter.constants.SignalSourceEnum" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">enum.Enum</span></code></p>
+<p>An enumeration.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="privacy_meter.constants.SignalSourceEnum.REFERENCE">
+<span class="sig-name descname"><span class="pre">REFERENCE</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'reference'</span></em><a class="headerlink" href="#privacy_meter.constants.SignalSourceEnum.REFERENCE" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="privacy_meter.constants.SignalSourceEnum.REFERENCE_MEMBER">
+<span class="sig-name descname"><span class="pre">REFERENCE_MEMBER</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'reference_member'</span></em><a class="headerlink" href="#privacy_meter.constants.SignalSourceEnum.REFERENCE_MEMBER" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="privacy_meter.constants.SignalSourceEnum.REFERENCE_NON_MEMBER">
+<span class="sig-name descname"><span class="pre">REFERENCE_NON_MEMBER</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'reference_non_member'</span></em><a class="headerlink" href="#privacy_meter.constants.SignalSourceEnum.REFERENCE_NON_MEMBER" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="privacy_meter.constants.SignalSourceEnum.TARGET_MEMBER">
+<span class="sig-name descname"><span class="pre">TARGET_MEMBER</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'target_member'</span></em><a class="headerlink" href="#privacy_meter.constants.SignalSourceEnum.TARGET_MEMBER" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="privacy_meter.constants.SignalSourceEnum.TARGET_NON_MEMBER">
+<span class="sig-name descname"><span class="pre">TARGET_NON_MEMBER</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'target_non_member'</span></em><a class="headerlink" href="#privacy_meter.constants.SignalSourceEnum.TARGET_NON_MEMBER" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-privacy_meter.dataset">
+<span id="privacy-meter-dataset-module"></span><h2>privacy_meter.dataset module<a class="headerlink" href="#module-privacy_meter.dataset" title="Permalink to this headline"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="privacy_meter.dataset.Dataset">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">privacy_meter.dataset.</span></span><span class="sig-name descname"><span class="pre">Dataset</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data_dict</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">default_input</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">default_output</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">preproc_fn_dict</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">dict</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">preprocessed</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/privacy_meter/dataset.html#Dataset"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#privacy_meter.dataset.Dataset" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Wrapper around a dictionary-like formatted dataset, with functions to run preprocessing, to define default
+input/output features, and to split a dataset easily.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="privacy_meter.dataset.Dataset.get_feature">
+<span class="sig-name descname"><span class="pre">get_feature</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">split_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">feature_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">indices</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">list</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/privacy_meter/dataset.html#Dataset.get_feature"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#privacy_meter.dataset.Dataset.get_feature" title="Permalink to this definition"></a></dt>
+<dd><p>Returns a specific feature from samples of a specific split.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>split_name</strong> – Name of the split</p></li>
+<li><p><strong>feature_name</strong> – Name of the feature</p></li>
+<li><p><strong>indices</strong> – Optional list of indices. If not specified, the entire subset is returned.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The requested feature, from samples of the requested split.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="privacy_meter.dataset.Dataset.preprocess">
+<span class="sig-name descname"><span class="pre">preprocess</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/privacy_meter/dataset.html#Dataset.preprocess"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#privacy_meter.dataset.Dataset.preprocess" title="Permalink to this definition"></a></dt>
+<dd><p>Preprocessing function, executed by the constructor, based on the preproc_fn_dict attribute.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="privacy_meter.dataset.Dataset.subdivide">
+<span class="sig-name descname"><span class="pre">subdivide</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">num_splits</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">split_names</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">list</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">method</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'independent'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">split_size</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">delete_original</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">in_place</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">return_results</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/privacy_meter/dataset.html#Dataset.subdivide"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#privacy_meter.dataset.Dataset.subdivide" title="Permalink to this definition"></a></dt>
+<dd><p>Subdivides the splits contained in split_names into sub-splits, e.g. for shadow model training.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>num_splits</strong> – Number of sub-splits per original split.</p></li>
+<li><p><strong>split_names</strong> – The splits to subdivide (e.g. train and test). By default, includes all splits.</p></li>
+<li><p><strong>method</strong> – Either independent or random. If method is independent, then the sub-splits are a partition of the
+original split (i.e. they contain the entire split without repetition). If method is random, then each
+sub-split is a random subset of the original split (i.e. some samples might be missing or repeated). If
+method is hybrid, then each sub-split is a random subset of the original split, with the guarantee that
+the 1st one is not overlapping with the others.</p></li>
+<li><p><strong>split_size</strong> – If method is random, this is the size of one split (ignored if method is independent). Can
+either be an integer, or a dictionary of integer (one per split).</p></li>
+<li><p><strong>delete_original</strong> – Indicates if the original split should be deleted.</p></li>
+<li><p><strong>in_place</strong> – Indicates if the new splits should be included in the parent object or not</p></li>
+<li><p><strong>return_results</strong> – Indicates if the new splits should be returned or not</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>If in_place, a list of new Dataset objects, with the sub-splits. Otherwise, nothing, as the results are
+stored in self.data_dict.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-privacy_meter.hypothesis_test">
+<span id="privacy-meter-hypothesis-test-module"></span><h2>privacy_meter.hypothesis_test module<a class="headerlink" href="#module-privacy_meter.hypothesis_test" title="Permalink to this headline"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="privacy_meter.hypothesis_test.threshold_func">
+<span class="sig-prename descclassname"><span class="pre">privacy_meter.hypothesis_test.</span></span><span class="sig-name descname"><span class="pre">threshold_func</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">distribution</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">alpha</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="reference internal" href="_modules/privacy_meter/hypothesis_test.html#threshold_func"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#privacy_meter.hypothesis_test.threshold_func" title="Permalink to this definition"></a></dt>
+<dd><p>Function that returns the threshold as the alpha quantile of
+the provided distribution.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>distribution</strong> – Sequence of values that form the distribution from which</p></li>
+<li><p><strong>computed.</strong> (<em>the threshold is</em>) – </p></li>
+<li><p><strong>alpha</strong> – Quantile value that will be used to obtain the threshold from the</p></li>
+<li><p><strong>distribution.</strong> – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>alpha quantile of the provided distribution</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>threshold</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-privacy_meter.information_source">
+<span id="privacy-meter-information-source-module"></span><h2>privacy_meter.information_source module<a class="headerlink" href="#module-privacy_meter.information_source" title="Permalink to this headline"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="privacy_meter.information_source.InformationSource">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">privacy_meter.information_source.</span></span><span class="sig-name descname"><span class="pre">InformationSource</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">models</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#privacy_meter.model.Model" title="privacy_meter.model.Model"><span class="pre">privacy_meter.model.Model</span></a><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">datasets</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#privacy_meter.dataset.Dataset" title="privacy_meter.dataset.Dataset"><span class="pre">privacy_meter.dataset.Dataset</span></a><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">default_model_to_split_mapping</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/privacy_meter/information_source.html#InformationSource"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#privacy_meter.information_source.InformationSource" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Interface to dispatch Model objects, Dataset objects, and any additional objects required, to Signal objects.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="privacy_meter.information_source.InformationSource.get_signal">
+<span class="sig-name descname"><span class="pre">get_signal</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">signal</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#privacy_meter.information_source_signal.Signal" title="privacy_meter.information_source_signal.Signal"><span class="pre">privacy_meter.information_source_signal.Signal</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">model_to_split_mapping</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">extra</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">dict</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/privacy_meter/information_source.html#InformationSource.get_signal"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#privacy_meter.information_source.InformationSource.get_signal" title="Permalink to this definition"></a></dt>
+<dd><p>Calls the signal object with the appropriate arguments: Model objects and Dataset objects specified at
+object instantiation, plus and any additional object required.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>signal</strong> – The signal object to call</p></li>
+<li><p><strong>model_to_split_mapping</strong> – List of tuples, indicating how each model should query the dataset.
+More specifically, for model #i:
+model_to_split_mapping[i][0] contains the index of the dataset in the list,
+model_to_split_mapping[i][1] contains the name of the split,
+model_to_split_mapping[i][2] contains the name of the input feature,
+model_to_split_mapping[i][3] contains the name of the output feature.
+This can also be provided once and for all at the instantiation of InformationSource, through the
+default_model_to_split_mapping argument.</p></li>
+<li><p><strong>extra</strong> – Dictionary containing any additional parameter that should be passed to the signal object.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The signal value.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-privacy_meter.information_source_signal">
+<span id="privacy-meter-information-source-signal-module"></span><h2>privacy_meter.information_source_signal module<a class="headerlink" href="#module-privacy_meter.information_source_signal" title="Permalink to this headline"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="privacy_meter.information_source_signal.DatasetSample">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">privacy_meter.information_source_signal.</span></span><span class="sig-name descname"><span class="pre">DatasetSample</span></span><a class="reference internal" href="_modules/privacy_meter/information_source_signal.html#DatasetSample"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#privacy_meter.information_source_signal.DatasetSample" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#privacy_meter.information_source_signal.Signal" title="privacy_meter.information_source_signal.Signal"><code class="xref py py-class docutils literal notranslate"><span class="pre">privacy_meter.information_source_signal.Signal</span></code></a></p>
+<p>Inherits of the Signal class, used to represent any type of signal that can be obtained from a Model and/or a Dataset.
+This particular class is used to get a given point from the Dataset.</p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="privacy_meter.information_source_signal.ModelGradient">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">privacy_meter.information_source_signal.</span></span><span class="sig-name descname"><span class="pre">ModelGradient</span></span><a class="reference internal" href="_modules/privacy_meter/information_source_signal.html#ModelGradient"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#privacy_meter.information_source_signal.ModelGradient" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#privacy_meter.information_source_signal.Signal" title="privacy_meter.information_source_signal.Signal"><code class="xref py py-class docutils literal notranslate"><span class="pre">privacy_meter.information_source_signal.Signal</span></code></a></p>
+<p>Inherits of the Signal class, used to represent any type of signal that can be obtained from a Model and/or a Dataset.
+This particular class is used to get the gradient of a model.</p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="privacy_meter.information_source_signal.ModelIntermediateOutput">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">privacy_meter.information_source_signal.</span></span><span class="sig-name descname"><span class="pre">ModelIntermediateOutput</span></span><a class="reference internal" href="_modules/privacy_meter/information_source_signal.html#ModelIntermediateOutput"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#privacy_meter.information_source_signal.ModelIntermediateOutput" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#privacy_meter.information_source_signal.Signal" title="privacy_meter.information_source_signal.Signal"><code class="xref py py-class docutils literal notranslate"><span class="pre">privacy_meter.information_source_signal.Signal</span></code></a></p>
+<p>Inherits of the Signal class, used to represent any type of signal that can be obtained from a Model and/or a Dataset.
+This particular class is used to get the value of an intermediate layer of model.</p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="privacy_meter.information_source_signal.ModelLoss">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">privacy_meter.information_source_signal.</span></span><span class="sig-name descname"><span class="pre">ModelLoss</span></span><a class="reference internal" href="_modules/privacy_meter/information_source_signal.html#ModelLoss"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#privacy_meter.information_source_signal.ModelLoss" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#privacy_meter.information_source_signal.Signal" title="privacy_meter.information_source_signal.Signal"><code class="xref py py-class docutils literal notranslate"><span class="pre">privacy_meter.information_source_signal.Signal</span></code></a></p>
+<p>Inherits of the Signal class, used to represent any type of signal that can be obtained from a Model and/or a Dataset.
+This particular class is used to get the loss of a model.</p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="privacy_meter.information_source_signal.ModelOutput">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">privacy_meter.information_source_signal.</span></span><span class="sig-name descname"><span class="pre">ModelOutput</span></span><a class="reference internal" href="_modules/privacy_meter/information_source_signal.html#ModelOutput"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#privacy_meter.information_source_signal.ModelOutput" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#privacy_meter.information_source_signal.Signal" title="privacy_meter.information_source_signal.Signal"><code class="xref py py-class docutils literal notranslate"><span class="pre">privacy_meter.information_source_signal.Signal</span></code></a></p>
+<p>Inherits of the Signal class, used to represent any type of signal that can be obtained from a Model and/or a Dataset.
+This particular class is used to get the output of a model.</p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="privacy_meter.information_source_signal.Signal">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">privacy_meter.information_source_signal.</span></span><span class="sig-name descname"><span class="pre">Signal</span></span><a class="reference internal" href="_modules/privacy_meter/information_source_signal.html#Signal"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#privacy_meter.information_source_signal.Signal" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">abc.ABC</span></code></p>
+<p>Abstract class, representing any type of signal that can be obtained from a Model and/or a Dataset.</p>
+</dd></dl>
+
+</section>
+<section id="module-privacy_meter.metric">
+<span id="privacy-meter-metric-module"></span><h2>privacy_meter.metric module<a class="headerlink" href="#module-privacy_meter.metric" title="Permalink to this headline"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="privacy_meter.metric.Metric">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">privacy_meter.metric.</span></span><span class="sig-name descname"><span class="pre">Metric</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">target_info_source</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#privacy_meter.information_source.InformationSource" title="privacy_meter.information_source.InformationSource"><span class="pre">privacy_meter.information_source.InformationSource</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">reference_info_source</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#privacy_meter.information_source.InformationSource" title="privacy_meter.information_source.InformationSource"><span class="pre">privacy_meter.information_source.InformationSource</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">signals</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#privacy_meter.information_source_signal.Signal" title="privacy_meter.information_source_signal.Signal"><span class="pre">privacy_meter.information_source_signal.Signal</span></a><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hypothesis_test_func</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">Callable</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">logs_dirname</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/privacy_meter/metric.html#Metric"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#privacy_meter.metric.Metric" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">abc.ABC</span></code></p>
+<p>Interface to construct and perform a membership inference attack
+on a target model and dataset using auxiliary information specified
+by the user. This serves as a guideline for implementing a metric
+to be used for measuring the privacy leakage of a target model.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="privacy_meter.metric.Metric.prepare_metric">
+<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">prepare_metric</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/privacy_meter/metric.html#Metric.prepare_metric"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#privacy_meter.metric.Metric.prepare_metric" title="Permalink to this definition"></a></dt>
+<dd><p>Function to prepare data needed for running the metric on
+the target model and dataset, using signals computed on the
+auxiliary model(s) and dataset.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="privacy_meter.metric.Metric.run_metric">
+<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">run_metric</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fpr_tolerance_rate_list</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Union</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#privacy_meter.metric_result.MetricResult" title="privacy_meter.metric_result.MetricResult"><span class="pre">privacy_meter.metric_result.MetricResult</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#privacy_meter.metric_result.MetricResult" title="privacy_meter.metric_result.MetricResult"><span class="pre">privacy_meter.metric_result.MetricResult</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/privacy_meter/metric.html#Metric.run_metric"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#privacy_meter.metric.Metric.run_metric" title="Permalink to this definition"></a></dt>
+<dd><p>Function to run the metric on the target model and dataset.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>fpr_tolerance_rate_list</strong> (<em>optional</em>) – List of FPR tolerance values</p></li>
+<li><p><strong>attack</strong> (<em>that may be used by the threshold function to compute the</em>) – </p></li>
+<li><p><strong>metric.</strong> (<em>threshold for the</em>) – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Result(s) of the metric</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="privacy_meter.metric.PopulationMetric">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">privacy_meter.metric.</span></span><span class="sig-name descname"><span class="pre">PopulationMetric</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">target_info_source</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#privacy_meter.information_source.InformationSource" title="privacy_meter.information_source.InformationSource"><span class="pre">privacy_meter.information_source.InformationSource</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">reference_info_source</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#privacy_meter.information_source.InformationSource" title="privacy_meter.information_source.InformationSource"><span class="pre">privacy_meter.information_source.InformationSource</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">signals</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#privacy_meter.information_source_signal.Signal" title="privacy_meter.information_source_signal.Signal"><span class="pre">privacy_meter.information_source_signal.Signal</span></a><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hypothesis_test_func</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">Callable</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">target_model_to_train_split_mapping</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">target_model_to_test_split_mapping</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reference_model_to_train_split_mapping</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">unique_dataset</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">logs_dirname</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/privacy_meter/metric.html#PopulationMetric"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#privacy_meter.metric.PopulationMetric" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#privacy_meter.metric.Metric" title="privacy_meter.metric.Metric"><code class="xref py py-class docutils literal notranslate"><span class="pre">privacy_meter.metric.Metric</span></code></a></p>
+<p>Inherits the Metric class to perform the population membership inference attack
+which will be used as a metric for measuring privacy leakage of a target model.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="privacy_meter.metric.PopulationMetric.prepare_metric">
+<span class="sig-name descname"><span class="pre">prepare_metric</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/privacy_meter/metric.html#PopulationMetric.prepare_metric"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#privacy_meter.metric.PopulationMetric.prepare_metric" title="Permalink to this definition"></a></dt>
+<dd><p>Function to prepare data needed for running the metric on
+the target model and dataset, using signals computed on the
+auxiliary model(s) and dataset. For the population attack,
+the auxiliary model is the target model itself, and the
+auxiliary dataset is a random split from the target model’s
+training data.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="privacy_meter.metric.PopulationMetric.run_metric">
+<span class="sig-name descname"><span class="pre">run_metric</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fpr_tolerance_rate_list</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#privacy_meter.metric_result.MetricResult" title="privacy_meter.metric_result.MetricResult"><span class="pre">privacy_meter.metric_result.MetricResult</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/privacy_meter/metric.html#PopulationMetric.run_metric"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#privacy_meter.metric.PopulationMetric.run_metric" title="Permalink to this definition"></a></dt>
+<dd><p>Function to run the metric on the target model and dataset.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>fpr_tolerance_rate_list</strong> (<em>optional</em>) – List of FPR tolerance values</p></li>
+<li><p><strong>attack</strong> (<em>that may be used by the threshold function to compute the</em>) – </p></li>
+<li><p><strong>metric.</strong> (<em>threshold for the</em>) – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A list of MetricResult objects, one per fpr value.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="privacy_meter.metric.ReferenceMetric">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">privacy_meter.metric.</span></span><span class="sig-name descname"><span class="pre">ReferenceMetric</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">target_info_source</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#privacy_meter.information_source.InformationSource" title="privacy_meter.information_source.InformationSource"><span class="pre">privacy_meter.information_source.InformationSource</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">reference_info_source</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#privacy_meter.information_source.InformationSource" title="privacy_meter.information_source.InformationSource"><span class="pre">privacy_meter.information_source.InformationSource</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">signals</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#privacy_meter.information_source_signal.Signal" title="privacy_meter.information_source_signal.Signal"><span class="pre">privacy_meter.information_source_signal.Signal</span></a><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hypothesis_test_func</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">Callable</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">target_model_to_train_split_mapping</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">target_model_to_test_split_mapping</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reference_model_to_train_split_mapping</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reference_model_to_test_split_mapping</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">unique_dataset</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">logs_dirname</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/privacy_meter/metric.html#ReferenceMetric"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#privacy_meter.metric.ReferenceMetric" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#privacy_meter.metric.Metric" title="privacy_meter.metric.Metric"><code class="xref py py-class docutils literal notranslate"><span class="pre">privacy_meter.metric.Metric</span></code></a></p>
+<p>Inherits the Metric class to perform the reference membership inference attack
+which will be used as a metric for measuring privacy leakage of a target model.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="privacy_meter.metric.ReferenceMetric.prepare_metric">
+<span class="sig-name descname"><span class="pre">prepare_metric</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/privacy_meter/metric.html#ReferenceMetric.prepare_metric"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#privacy_meter.metric.ReferenceMetric.prepare_metric" title="Permalink to this definition"></a></dt>
+<dd><p>Function to prepare data needed for running the metric on the target model and dataset, using signals computed
+on the reference model(s) and dataset. For the reference attack, the reference models will be a list of models
+trained on data from the same distribution, and the reference dataset will be the target model’s train-test
+split.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="privacy_meter.metric.ReferenceMetric.run_metric">
+<span class="sig-name descname"><span class="pre">run_metric</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fpr_tolerance_rate_list</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#privacy_meter.metric_result.MetricResult" title="privacy_meter.metric_result.MetricResult"><span class="pre">privacy_meter.metric_result.MetricResult</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/privacy_meter/metric.html#ReferenceMetric.run_metric"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#privacy_meter.metric.ReferenceMetric.run_metric" title="Permalink to this definition"></a></dt>
+<dd><p>Function to run the metric on the target model and dataset.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>fpr_tolerance_rate_list</strong> (<em>optional</em>) – List of FPR tolerance values that may be used by the threshold function</p></li>
+<li><p><strong>metric.</strong> (<em>to compute the attack threshold for the</em>) – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A list of MetricResult objects, one per fpr value.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="privacy_meter.metric.ShadowMetric">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">privacy_meter.metric.</span></span><span class="sig-name descname"><span class="pre">ShadowMetric</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">target_info_source</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#privacy_meter.information_source.InformationSource" title="privacy_meter.information_source.InformationSource"><span class="pre">privacy_meter.information_source.InformationSource</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">reference_info_source</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#privacy_meter.information_source.InformationSource" title="privacy_meter.information_source.InformationSource"><span class="pre">privacy_meter.information_source.InformationSource</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">signals</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#privacy_meter.information_source_signal.Signal" title="privacy_meter.information_source_signal.Signal"><span class="pre">privacy_meter.information_source_signal.Signal</span></a><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hypothesis_test_func</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">Callable</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">target_model_to_train_split_mapping</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">target_model_to_test_split_mapping</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reference_model_to_train_split_mapping</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reference_model_to_test_split_mapping</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reweight_samples</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">unique_dataset</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">logs_dirname</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/privacy_meter/metric.html#ShadowMetric"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#privacy_meter.metric.ShadowMetric" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#privacy_meter.metric.Metric" title="privacy_meter.metric.Metric"><code class="xref py py-class docutils literal notranslate"><span class="pre">privacy_meter.metric.Metric</span></code></a></p>
+<p>Inherits the Metric class to perform the shadow membership inference attack
+which will be used as a metric for measuring privacy leakage of a target model.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="privacy_meter.metric.ShadowMetric.prepare_metric">
+<span class="sig-name descname"><span class="pre">prepare_metric</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/privacy_meter/metric.html#ShadowMetric.prepare_metric"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#privacy_meter.metric.ShadowMetric.prepare_metric" title="Permalink to this definition"></a></dt>
+<dd><p>Function to prepare data needed for running the metric on the target model and dataset, using signals computed
+on the reference model(s) and dataset. For the shadow attack, the reference models will be a list of shadow
+models and the auxiliary dataset will contain the train-test splits of these models.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="privacy_meter.metric.ShadowMetric.run_metric">
+<span class="sig-name descname"><span class="pre">run_metric</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fpr_tolerance_rate_list</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#privacy_meter.metric_result.MetricResult" title="privacy_meter.metric_result.MetricResult"><span class="pre">privacy_meter.metric_result.MetricResult</span></a></span></span><a class="reference internal" href="_modules/privacy_meter/metric.html#ShadowMetric.run_metric"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#privacy_meter.metric.ShadowMetric.run_metric" title="Permalink to this definition"></a></dt>
+<dd><p>Function to run the metric on the target model and dataset.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>fpr_tolerance_rate_list</strong> (<em>optional</em>) – List of FPR tolerance values that may be used by the threshold function</p></li>
+<li><p><strong>metric.</strong> (<em>to compute the attack threshold for the</em>) – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The result of the metric</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-privacy_meter.metric_result">
+<span id="privacy-meter-metric-result-module"></span><h2>privacy_meter.metric_result module<a class="headerlink" href="#module-privacy_meter.metric_result" title="Permalink to this headline"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="privacy_meter.metric_result.MetricResult">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">privacy_meter.metric_result.</span></span><span class="sig-name descname"><span class="pre">MetricResult</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">metric_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">predicted_labels</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">true_labels</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">predictions_proba</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">signal_values</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">threshold</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/privacy_meter/metric_result.html#MetricResult"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#privacy_meter.metric_result.MetricResult" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Contains results related to the performance of the metric.</p>
+</dd></dl>
+
+</section>
+<section id="module-privacy_meter.model">
+<span id="privacy-meter-model-module"></span><h2>privacy_meter.model module<a class="headerlink" href="#module-privacy_meter.model" title="Permalink to this headline"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="privacy_meter.model.HuggingFaceCausalLanguageModel">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">privacy_meter.model.</span></span><span class="sig-name descname"><span class="pre">HuggingFaceCausalLanguageModel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model_obj</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">loss_fn</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stride</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">64</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/privacy_meter/model.html#HuggingFaceCausalLanguageModel"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#privacy_meter.model.HuggingFaceCausalLanguageModel" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#privacy_meter.model.LanguageModel" title="privacy_meter.model.LanguageModel"><code class="xref py py-class docutils literal notranslate"><span class="pre">privacy_meter.model.LanguageModel</span></code></a></p>
+<p>Inherits from the LanguageModel class, an interface to query a language model
+without any assumption on how it is implemented.
+This particular class is to be used with HuggingFace causal language models.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="privacy_meter.model.HuggingFaceCausalLanguageModel.get_grad">
+<span class="sig-name descname"><span class="pre">get_grad</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">batch_samples</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">batch_labels</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/privacy_meter/model.html#HuggingFaceCausalLanguageModel.get_grad"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#privacy_meter.model.HuggingFaceCausalLanguageModel.get_grad" title="Permalink to this definition"></a></dt>
+<dd><p>Function to get the gradient of the model loss with respect to the model parameters, on a given input and an
+expected output.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>batch_samples</strong> – Model input</p></li>
+<li><p><strong>batch_labels</strong> – Model expected output</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A list of gradients of the model loss (one item per layer) with respect to the model parameters.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="privacy_meter.model.HuggingFaceCausalLanguageModel.get_intermediate_outputs">
+<span class="sig-name descname"><span class="pre">get_intermediate_outputs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">layers</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">batch_samples</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">forward_pass</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/privacy_meter/model.html#HuggingFaceCausalLanguageModel.get_intermediate_outputs"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#privacy_meter.model.HuggingFaceCausalLanguageModel.get_intermediate_outputs" title="Permalink to this definition"></a></dt>
+<dd><p>Function to get the intermediate output of layers (a.k.a. features), on a given input.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>layers</strong> – List of integers and/or strings, indicating which layers values should be returned</p></li>
+<li><p><strong>batch_samples</strong> – Model input</p></li>
+<li><p><strong>forward_pass</strong> – Boolean indicating if a new forward pass should be executed. If True, then a forward pass is
+executed on batch_samples. Else, the result is the one of the last forward pass.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A list of intermediate outputs of layers.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="privacy_meter.model.HuggingFaceCausalLanguageModel.get_loss">
+<span class="sig-name descname"><span class="pre">get_loss</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">batch_samples</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">batch_labels</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">per_point</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/privacy_meter/model.html#HuggingFaceCausalLanguageModel.get_loss"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#privacy_meter.model.HuggingFaceCausalLanguageModel.get_loss" title="Permalink to this definition"></a></dt>
+<dd><p>Function to get the model loss on a given input and an expected output.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>batch_samples</strong> – Model input</p></li>
+<li><p><strong>batch_labels</strong> – Model expected output</p></li>
+<li><p><strong>per_point</strong> – Boolean indicating if loss should be returned per point or reduced</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The loss value, as defined by the loss_fn attribute.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="privacy_meter.model.HuggingFaceCausalLanguageModel.get_outputs">
+<span class="sig-name descname"><span class="pre">get_outputs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">batch_samples</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/privacy_meter/model.html#HuggingFaceCausalLanguageModel.get_outputs"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#privacy_meter.model.HuggingFaceCausalLanguageModel.get_outputs" title="Permalink to this definition"></a></dt>
+<dd><p>Function to get the model output from a given input.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>batch_samples</strong> – Model input</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Model output</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="privacy_meter.model.HuggingFaceCausalLanguageModel.get_perplexity">
+<span class="sig-name descname"><span class="pre">get_perplexity</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">batch_samples</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/privacy_meter/model.html#HuggingFaceCausalLanguageModel.get_perplexity"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#privacy_meter.model.HuggingFaceCausalLanguageModel.get_perplexity" title="Permalink to this definition"></a></dt>
+<dd><p>Function to get the perplexity of the model loss, on a given input sequence.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>batch_samples</strong> – Model input</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A list of perplexity values.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="privacy_meter.model.LanguageModel">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">privacy_meter.model.</span></span><span class="sig-name descname"><span class="pre">LanguageModel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model_obj</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">loss_fn</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/privacy_meter/model.html#LanguageModel"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#privacy_meter.model.LanguageModel" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#privacy_meter.model.Model" title="privacy_meter.model.Model"><code class="xref py py-class docutils literal notranslate"><span class="pre">privacy_meter.model.Model</span></code></a></p>
+<p>Inherits from the Model class, an interface to query a model without any assumption on how it is implemented.
+This particular abstract class is to be used with language models.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="privacy_meter.model.LanguageModel.get_perplexity">
+<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_perplexity</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">batch_samples</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/privacy_meter/model.html#LanguageModel.get_perplexity"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#privacy_meter.model.LanguageModel.get_perplexity" title="Permalink to this definition"></a></dt>
+<dd><p>Function to get the perplexity of the model loss, on a given input sequence.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>batch_samples</strong> – Model input</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A list of perplexity values.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="privacy_meter.model.Model">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">privacy_meter.model.</span></span><span class="sig-name descname"><span class="pre">Model</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model_obj</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">loss_fn</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/privacy_meter/model.html#Model"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#privacy_meter.model.Model" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">abc.ABC</span></code></p>
+<p>Interface to query a model without any assumption on how it is implemented.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="privacy_meter.model.Model.get_grad">
+<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_grad</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">batch_samples</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">batch_labels</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/privacy_meter/model.html#Model.get_grad"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#privacy_meter.model.Model.get_grad" title="Permalink to this definition"></a></dt>
+<dd><p>Function to get the gradient of the model loss with respect to the model parameters, on a given input and an
+expected output.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>batch_samples</strong> – Model input</p></li>
+<li><p><strong>batch_labels</strong> – Model expected output</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A list of gradients of the model loss (one item per layer) with respect to the model parameters.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="privacy_meter.model.Model.get_intermediate_outputs">
+<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_intermediate_outputs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">layers</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">batch_samples</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">forward_pass</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/privacy_meter/model.html#Model.get_intermediate_outputs"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#privacy_meter.model.Model.get_intermediate_outputs" title="Permalink to this definition"></a></dt>
+<dd><p>Function to get the intermediate output of layers (a.k.a. features), on a given input.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>layers</strong> – List of integers and/or strings, indicating which layers values should be returned</p></li>
+<li><p><strong>batch_samples</strong> – Model input</p></li>
+<li><p><strong>forward_pass</strong> – Boolean indicating if a new forward pass should be executed. If True, then a forward pass is
+executed on batch_samples. Else, the result is the one of the last forward pass.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A list of intermediate outputs of layers.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="privacy_meter.model.Model.get_loss">
+<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_loss</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">batch_samples</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">batch_labels</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">per_point</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/privacy_meter/model.html#Model.get_loss"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#privacy_meter.model.Model.get_loss" title="Permalink to this definition"></a></dt>
+<dd><p>Function to get the model loss on a given input and an expected output.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>batch_samples</strong> – Model input</p></li>
+<li><p><strong>batch_labels</strong> – Model expected output</p></li>
+<li><p><strong>per_point</strong> – Boolean indicating if loss should be returned per point or reduced</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The loss value, as defined by the loss_fn attribute.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="privacy_meter.model.Model.get_outputs">
+<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_outputs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">batch_samples</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/privacy_meter/model.html#Model.get_outputs"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#privacy_meter.model.Model.get_outputs" title="Permalink to this definition"></a></dt>
+<dd><p>Function to get the model output from a given input.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>batch_samples</strong> – Model input</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Model output</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="privacy_meter.model.PytorchModel">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">privacy_meter.model.</span></span><span class="sig-name descname"><span class="pre">PytorchModel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model_obj</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">loss_fn</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/privacy_meter/model.html#PytorchModel"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#privacy_meter.model.PytorchModel" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#privacy_meter.model.Model" title="privacy_meter.model.Model"><code class="xref py py-class docutils literal notranslate"><span class="pre">privacy_meter.model.Model</span></code></a></p>
+<p>Inherits from the Model class, an interface to query a model without any assumption on how it is implemented.
+This particular class is to be used with pytorch models.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="privacy_meter.model.PytorchModel.get_grad">
+<span class="sig-name descname"><span class="pre">get_grad</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">batch_samples</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">batch_labels</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/privacy_meter/model.html#PytorchModel.get_grad"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#privacy_meter.model.PytorchModel.get_grad" title="Permalink to this definition"></a></dt>
+<dd><p>Function to get the gradient of the model loss with respect to the model parameters, on a given input and an
+expected output.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>batch_samples</strong> – Model input</p></li>
+<li><p><strong>batch_labels</strong> – Model expected output</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A list of gradients of the model loss (one item per layer) with respect to the model parameters.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="privacy_meter.model.PytorchModel.get_intermediate_outputs">
+<span class="sig-name descname"><span class="pre">get_intermediate_outputs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">layers</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">batch_samples</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">forward_pass</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/privacy_meter/model.html#PytorchModel.get_intermediate_outputs"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#privacy_meter.model.PytorchModel.get_intermediate_outputs" title="Permalink to this definition"></a></dt>
+<dd><p>Function to get the intermediate output of layers (a.k.a. features), on a given input.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>layers</strong> – List of integers and/or strings, indicating which layers values should be returned</p></li>
+<li><p><strong>batch_samples</strong> – Model input</p></li>
+<li><p><strong>forward_pass</strong> – Boolean indicating if a new forward pass should be executed. If True, then a forward pass is
+executed on batch_samples. Else, the result is the one of the last forward pass.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A list of intermediate outputs of layers.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="privacy_meter.model.PytorchModel.get_loss">
+<span class="sig-name descname"><span class="pre">get_loss</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">batch_samples</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">batch_labels</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">per_point</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/privacy_meter/model.html#PytorchModel.get_loss"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#privacy_meter.model.PytorchModel.get_loss" title="Permalink to this definition"></a></dt>
+<dd><p>Function to get the model loss on a given input and an expected output.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>batch_samples</strong> – Model input</p></li>
+<li><p><strong>batch_labels</strong> – Model expected output</p></li>
+<li><p><strong>per_point</strong> – Boolean indicating if loss should be returned per point or reduced</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The loss value, as defined by the loss_fn attribute.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="privacy_meter.model.PytorchModel.get_outputs">
+<span class="sig-name descname"><span class="pre">get_outputs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">batch_samples</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/privacy_meter/model.html#PytorchModel.get_outputs"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#privacy_meter.model.PytorchModel.get_outputs" title="Permalink to this definition"></a></dt>
+<dd><p>Function to get the model output from a given input.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>batch_samples</strong> – Model input</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Model output</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="privacy_meter.model.TensorflowModel">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">privacy_meter.model.</span></span><span class="sig-name descname"><span class="pre">TensorflowModel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model_obj</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">loss_fn</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/privacy_meter/model.html#TensorflowModel"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#privacy_meter.model.TensorflowModel" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#privacy_meter.model.Model" title="privacy_meter.model.Model"><code class="xref py py-class docutils literal notranslate"><span class="pre">privacy_meter.model.Model</span></code></a></p>
+<p>Inherits from the Model class, an interface to query a model without any assumption on how it is implemented.
+This particular class is to be used with tensorflow models.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="privacy_meter.model.TensorflowModel.get_grad">
+<span class="sig-name descname"><span class="pre">get_grad</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">batch_samples</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">batch_labels</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/privacy_meter/model.html#TensorflowModel.get_grad"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#privacy_meter.model.TensorflowModel.get_grad" title="Permalink to this definition"></a></dt>
+<dd><p>Function to get the gradient of the model loss with respect to the model parameters, on a given input and an
+expected output.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>batch_samples</strong> – Model input</p></li>
+<li><p><strong>batch_labels</strong> – Model expected output</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A list of gradients of the model loss (one item per layer) with respect to the model parameters.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="privacy_meter.model.TensorflowModel.get_intermediate_outputs">
+<span class="sig-name descname"><span class="pre">get_intermediate_outputs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">layers</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">batch_samples</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">forward_pass</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/privacy_meter/model.html#TensorflowModel.get_intermediate_outputs"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#privacy_meter.model.TensorflowModel.get_intermediate_outputs" title="Permalink to this definition"></a></dt>
+<dd><p>Function to get the intermediate output of layers (a.k.a. features), on a given input.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>layers</strong> – List of integers and/or strings, indicating which layers values should be returned</p></li>
+<li><p><strong>batch_samples</strong> – Model input</p></li>
+<li><p><strong>forward_pass</strong> – Boolean indicating if a new forward pass should be executed. If True, then a forward pass is</p></li>
+<li><p><strong>Else</strong> (<em>executed on batch_samples.</em>) – </p></li>
+<li><p><strong>pass.</strong> (<em>the result is the one of the last forward</em>) – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A list of intermediate outputs of layers.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="privacy_meter.model.TensorflowModel.get_loss">
+<span class="sig-name descname"><span class="pre">get_loss</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">batch_samples</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">batch_labels</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">per_point</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/privacy_meter/model.html#TensorflowModel.get_loss"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#privacy_meter.model.TensorflowModel.get_loss" title="Permalink to this definition"></a></dt>
+<dd><p>Function to get the model loss on a given input and an expected output.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>batch_samples</strong> – Model input</p></li>
+<li><p><strong>batch_labels</strong> – Model expected output</p></li>
+<li><p><strong>per_point</strong> – Boolean indicating if loss should be returned per point or reduced</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The loss value, as defined by the loss_fn attribute.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="privacy_meter.model.TensorflowModel.get_outputs">
+<span class="sig-name descname"><span class="pre">get_outputs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">batch_samples</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/privacy_meter/model.html#TensorflowModel.get_outputs"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#privacy_meter.model.TensorflowModel.get_outputs" title="Permalink to this definition"></a></dt>
+<dd><p>Function to get the model output from a given input.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>batch_samples</strong> – Model input</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Model output</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-privacy_meter.utils">
+<span id="privacy-meter-utils-module"></span><h2>privacy_meter.utils module<a class="headerlink" href="#module-privacy_meter.utils" title="Permalink to this headline"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="privacy_meter.utils.flatten_array">
+<span class="sig-prename descclassname"><span class="pre">privacy_meter.utils.</span></span><span class="sig-name descname"><span class="pre">flatten_array</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">arr</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/privacy_meter/utils.html#flatten_array"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#privacy_meter.utils.flatten_array" title="Permalink to this definition"></a></dt>
+<dd><p>Utility function to recursively flatten a list of lists.
+Each element in the list can be another list, tuple, set, or np.ndarray,
+and can have variable sizes.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>arr</strong> – List of lists</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Flattened 1D np.ndarray version of arr.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-privacy_meter">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-privacy_meter" title="Permalink to this headline"></a></h2>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="modules.html" class="btn btn-neutral float-left" title="privacy_meter" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="privacy_meter.tests.html" class="btn btn-neutral float-right" title="privacy_meter.tests package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, Data Privacy and Trustworthy Machine Learning Research Lab.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
